@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[JavaSESocket编程之问题]]></title>
+    <url>%2F2017%2F09%2F16%2FJavaSESocket%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[问题1从标准输入流（即控制台输入）读取字符，不能使用ReadUTF()方法，否则会读取不进来。 问题2使用BufferedReader类的readLine()方法读取System.in的输入之后， 再用WriteUTF()发送给Server，server用ReadUTF()读的话，会抛异常。 解决办法对于问题1改用BufferedReader的ReadLine() 对于问题2尚未解决。个人猜测：因为编码不一样，WriteUTF/ReadUTF是要求Unicode编码，而中文操作系统，从标准输入流输入的应该是GBK编码 待以后深入学习Java能够看Java源码的时候再来解决。 问题2解决：真正的原因并不是编码的问题，即使client端改为PrintWriter类的println方法，server端改为BufferedReader类的readLine()方法，还是会有异常！ 而是没有调用flush()方法！！！。缓冲区没满，不调用flush()，输出流是不会输出的。所以才会抛出异常。 重要： flush()方法何时使用：涉及到缓冲区的类，都应该使用。 建议除了FileOutputStream和FileWriter类，BufferedWriter、DataOutputStream、PrintWriter、ObjectOutputstream等输出流都应该写flush()。 File***输出流是以二进制的形式写入的，所以flush()调用也无效果，可用可不用。 FileOutputStream()没有重写flush()，所以没效果]]></content>
+      <categories>
+        <category>Java问题汇总</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[指针1]]></title>
+    <url>%2F2017%2F08%2F22%2F%E6%8C%87%E9%92%881%2F</url>
+    <content type="text"><![CDATA[之前学C语言的时候，指针这一块总觉得很难，一直没有信心完全弄明白。 看过一遍书之后，知识点记得几天然后马上就忘记了。 这次争取完全理解，并且能够熟练应用！]]></content>
+      <categories>
+        <category>C语言巩固——《C和指针》读书笔记</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[First]]></title>
     <url>%2F2017%2F08%2F16%2FFirst%2F</url>
     <content type="text"><![CDATA[这是我建博客后尝试写的一个.md测试 遇到的坑1.yilia主题的所有文章按钮总算是所有东西都弄好了，弄“所有文章”的显示的时候，竟然报错 ERROR plugin load failed hexo-generator-json-content 后来才发现，原来是因为我的node.js的版本太低了 原来我用的是yilia主题，后来发现categories和tags怎么都搞不好。 最后就换了next主题 2.next主题添加站内搜索hexo-generator-searchdb这个也安装了： 1$ npm install hexo-generator-searchdb --save 站点配置文件也改了： 12345search: path: search.xml field: post format: html limit: 10000 一直无法搜索，原来还少了最后一步：主题配置文件 12local_search: enable: true 3.Markdown语法问题使用“```” 这个字符的时候，最好第一个“```”之后，（这里的`是用转义字符“\”打的）回车再写文本 不然很容易和下一个要引用的段穿在一起 还有#后面要空格才能接文本]]></content>
