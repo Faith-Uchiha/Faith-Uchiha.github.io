@@ -108,7 +108,7 @@
 <meta property="og:site_name" content="My DreamLand My Avalon">
 <meta property="og:description" content="今天在使用 java.util.Random类产生随机数的时候，遇到一个问题。 以下是出问题的代码">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-28T15:13:54.788Z">
+<meta property="og:updated_time" content="2017-09-28T15:19:27.792Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaSE练手项目之问题">
 <meta name="twitter:description" content="今天在使用 java.util.Random类产生随机数的时候，遇到一个问题。 以下是出问题的代码">
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  212
+                  233
                 </span>
               
 
@@ -444,6 +444,7 @@
 <p>解决：变为负数的原因是，<strong>nextInt(Bound) 返回的值是0~Bound-1的Int类型数</strong></p>
 <p>很有可能在if的 <strong>mis_step = r.nextInt(5)</strong>这个赋值语句中得到0值，随后mis_step –就会变为负数，然后就死掉，不会再有重新复制的机会，<strong>炮弹再也不会发出</strong>。</p>
 <p>看到变回正数的原因是：其实看到的是下一个Tank的mis_step了，而不是自身自动回复。</p>
+<p>所以,为了避免出现负数，一般的<strong>用法都是 r.nextInt(Bound)+XX</strong></p>
 
       
     </div>
