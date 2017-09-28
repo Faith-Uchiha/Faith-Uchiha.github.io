@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[JavaSE练手项目之问题]]></title>
+    <url>%2F2017%2F09%2F28%2FJavaSE%E7%BB%83%E6%89%8B%E9%A1%B9%E7%9B%AE%E4%B9%8B%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[今天在使用 java.util.Random类产生随机数的时候，遇到一个问题。 以下是出问题的代码 123456if(mis_step==0)&#123; mis_step = r.nextInt(5); this.fire();&#125;mis_step --; mis_step在对象new出来之后，成员变量已经用r.next(5)初始化。 在Debug中运行发现：Wacth窗中观察，mis_step会在运行一段时间之后变为负数，过了一会儿又变回了正数。 解决：变为负数的原因是，nextInt(Bound) 返回的值是0~Bound-1的Int类型数 很有可能在if的 mis_step = r.nextInt(5)这个赋值语句中得到0值，随后mis_step –就会变为负数，然后就死掉，不会再有重新复制的机会，炮弹再也不会发出。 看到变回正数的原因是：其实看到的是下一个Tank的mis_step了，而不是自身自动回复。]]></content>
+      <categories>
+        <category>Java问题汇总</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[JavaSESocket编程之问题]]></title>
     <url>%2F2017%2F09%2F16%2FJavaSESocket%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%97%AE%E9%A2%98%2F</url>
     <content type="text"><![CDATA[问题1从标准输入流（即控制台输入）读取字符，不能使用ReadUTF()方法，否则会读取不进来。 问题2使用BufferedReader类的readLine()方法读取System.in的输入之后， 再用WriteUTF()发送给Server，server用ReadUTF()读的话，会抛异常。 解决办法对于问题1改用BufferedReader的ReadLine() 对于问题2尚未解决。个人猜测：因为编码不一样，WriteUTF/ReadUTF是要求Unicode编码，而中文操作系统，从标准输入流输入的应该是GBK编码 待以后深入学习Java能够看Java源码的时候再来解决。 问题2解决：真正的原因并不是编码的问题，即使client端改为PrintWriter类的println方法，server端改为BufferedReader类的readLine()方法，还是会有异常！ 而是没有调用flush()方法！！！。缓冲区没满，不调用flush()，输出流是不会输出的。所以才会抛出异常。 重要： flush()方法何时使用：涉及到缓冲区的类，都应该使用。 建议除了FileOutputStream和FileWriter类，BufferedWriter、DataOutputStream、PrintWriter、ObjectOutputstream等输出流都应该写flush()。 File***输出流是以二进制的形式写入的，所以flush()调用也无效果，可用可不用。 FileOutputStream()没有重写flush()，所以没效果]]></content>
@@ -34,13 +42,13 @@
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
   </entry>
   <entry>
-    <title><![CDATA[分类]]></title>
-    <url>%2Fcategories%2Findex.html</url>
+    <title><![CDATA[标签]]></title>
+    <url>%2Ftags%2Findex.html</url>
     <content type="text"></content>
   </entry>
   <entry>
-    <title><![CDATA[标签]]></title>
-    <url>%2Ftags%2Findex.html</url>
+    <title><![CDATA[分类]]></title>
+    <url>%2Fcategories%2Findex.html</url>
     <content type="text"></content>
   </entry>
 </search>
