@@ -108,7 +108,7 @@
 <meta property="og:site_name" content="My DreamLand My Avalon">
 <meta property="og:description" content="问题再现在为坦克大战的坦克增加血条显示时，采用内部类BloodBlock + 构造方法的写法，这时问题来了，发现血条怎么都画不出来。 下面是问题代码。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-30T08:30:51.103Z">
+<meta property="og:updated_time" content="2017-09-30T09:16:58.756Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="类加载和初始化顺序的问题">
 <meta name="twitter:description" content="问题再现在为坦克大战的坦克增加血条显示时，采用内部类BloodBlock + 构造方法的写法，这时问题来了，发现血条怎么都画不出来。 下面是问题代码。">
@@ -351,7 +351,7 @@
             <span>更新于</span>
             <time>
               2017-09-30
-              15:53:43
+              17:14:43
             </time>
           </span>
           
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  573
+                  635
                 </span>
               
 
@@ -414,7 +414,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  3
                 </span>
               
             </div>
@@ -448,6 +448,7 @@
 <p>3.最后构造器。</p>
 <p>所以，上面的错误原因就是，在成员变量<strong>bb初始化的时候</strong>： BloodBlock bb = new BloodBlock(x,y);  这里还<strong>未执行Tank的构造方法</strong>，所以这个时候Tank的<strong>x,y并未赋值</strong>，为默认值0。</p>
 <p>改正：可以把new BloodBlock(x,y);这句话放入Tank()的构造方法里。</p>
+<p>实际上后面测试发现：如果用构造方法的话，血块就会固定在初始位置，然而血块应该是<strong>跟随Tank移动的，所以直接用Tank的x,y就好了</strong> 不用自己写构造方法。</p>
 <p>例子可参考:<a href="http://www.cnblogs.com/echo1937/p/6242578.html" target="_blank" rel="external">阿里巴巴14年校招附加题的解析</a><br>看了这个例子会对初始化过程有更深入的了解。</p>
 
       
