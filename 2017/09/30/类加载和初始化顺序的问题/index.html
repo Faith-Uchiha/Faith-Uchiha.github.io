@@ -108,7 +108,7 @@
 <meta property="og:site_name" content="My DreamLand My Avalon">
 <meta property="og:description" content="问题再现在为坦克大战的坦克增加血条显示时，采用内部类BloodBlock + 构造方法的写法，这时问题来了，发现血条怎么都画不出来。 下面是问题代码。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-30T08:25:43.348Z">
+<meta property="og:updated_time" content="2017-09-30T08:30:51.103Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="类加载和初始化顺序的问题">
 <meta name="twitter:description" content="问题再现在为坦克大战的坦克增加血条显示时，采用内部类BloodBlock + 构造方法的写法，这时问题来了，发现血条怎么都画不出来。 下面是问题代码。">
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  550
+                  573
                 </span>
               
 
@@ -446,7 +446,8 @@
 <p>1.<strong>初次主动使用</strong>某各类时，会加载类，此时为static变量<strong>分配内存</strong>，并设置默认值（0，null，false）。然后开始<strong>初始化static域</strong>：静态域中各部分执行的先后顺序与代码先后顺序有关（也就是说，静态代码块和静态变量，谁先执行，要看谁写在前面）</p>
 <p>2.然后是执行成员变量的初始化和代码块：执行先后顺序也是与代码位置有关</p>
 <p>3.最后构造器。</p>
-<p>所以，上面的错误就是，在成员变量<strong>bb初始化的时候</strong>： BloodBlock bb = new BloodBlock(x,y);  这里还<strong>未执行Tank的构造方法</strong>，所以这个时候Tank的<strong>x,y并未赋值</strong>，为默认值0。</p>
+<p>所以，上面的错误原因就是，在成员变量<strong>bb初始化的时候</strong>： BloodBlock bb = new BloodBlock(x,y);  这里还<strong>未执行Tank的构造方法</strong>，所以这个时候Tank的<strong>x,y并未赋值</strong>，为默认值0。</p>
+<p>改正：可以把new BloodBlock(x,y);这句话放入Tank()的构造方法里。</p>
 <p>例子可参考:<a href="http://www.cnblogs.com/echo1937/p/6242578.html" target="_blank" rel="external">阿里巴巴14年校招附加题的解析</a><br>看了这个例子会对初始化过程有更深入的了解。</p>
 
       
