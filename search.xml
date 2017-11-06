@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Linux下GCC编译]]></title>
+    <url>%2F2017%2F10%2F30%2FLinux%E4%B8%8BGCC%E7%BC%96%E8%AF%91%2F</url>
+    <content type="text"><![CDATA[gcc + 文件名.c 将.c文件预处理、汇编、编译、链接生成可执行程序 默认生成a.out可执行程序 gcc xx.c -o xx 同样也是预处理、汇编、编译链接 -o 指定输出文件的文件名。 gcc -O2 xx.c -o xx -O[1-3] 使用编译优化来编译程序，优化等级1-3，级别越大优化效果越好 gcc -c xx.c 生成.o文件，然后可以用gcc xx.o -o xx生成可执行文件 使用的时候，直接用2或3种方法就好了。写一句话，就完成，不用像老师写这么多句的。]]></content>
+      <categories>
+        <category>Linux知识</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[Linux命令]]></title>
+    <url>%2F2017%2F10%2F30%2FLinux%E5%91%BD%E4%BB%A4%2F</url>
+    <content type="text"><![CDATA[ls 显示当前目录下的文件和目录 -l 详细信息 -a 输出包括隐藏文件 mkdir 创建目录 -p 无父目录，一起创建。 mkdir test/tmp -p cp 拷贝 例子：cp 文件1 文件2 复制文件1内容到文件2 mv 移动或重命名 例子：mv 文件名1 文件名2 把名字改成文件名2 rm 删除文件 -r 删除子目录以及文件。 没有该参数的话 无法删除目录 -f 强制删除 echo 内容 &gt;文件名 cat 文件名 查看文件内容 ~ 表示主目录 clear 清屏 pwd 显示当前目录 输出格式是”/xx/xx” kill 关闭进程 top 动态进程列表 按q退出 man + 命令名称 显示命令帮助 （命令不会，找男人） tar -c 打包 -x 解压缩 -z gzip压缩格式 -j bzip2格式 -v 显示压缩/解压缩过程 -f 指定输出文件名 注意：打包后，后缀是.tar 打包并压缩后缀才是.tar.gz或.tar.bz2 例子：打包并压缩 tar -czvf 指定生成的名字&lt;.tar.gz&gt; 要压缩的文件(夹) 解压缩：tar -xzvf 压缩文件名&lt;.tar.gz&gt;]]></content>
+      <categories>
+        <category>Linux知识</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[命令格式]]></title>
     <url>%2F2017%2F10%2F29%2F%E5%91%BD%E4%BB%A4%E6%A0%BC%E5%BC%8F%2F</url>
     <content type="text"><![CDATA[[]——表示可选参数&lt;&gt;——表示必须 参数的格式：第一种：参数用-的说明后面的参数是字符形式（Unix 风格）。第二种：参数用–的说明后面的参数是单词形式（GNU 风格）。第三种：参数前有横的是 System V风格。第四种：参数前没有横的是 BSD风格。]]></content>
@@ -11,7 +27,7 @@
   <entry>
     <title><![CDATA[Github和git命令总结]]></title>
     <url>%2F2017%2F10%2F29%2FGithub%E5%92%8Cgit%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93%2F</url>
-    <content type="text"><![CDATA[Github1.仓库用于存放项目 2.分支master：主分支，存放最终版本代码 其他分支：对主分支的拷贝，我们在其他分支修改再合并到master。 在分支中对某个文件修改，然后Cmommit Changes就可以修改。 3.请求代码合并pull request：子分支请求和master分支进行合并，确认之后可以提交 merge pull request：确认合并到master。 如果想要删掉已经合并的分支，Delete branch git命令1.git clone https：//先去repo页面点绿色的Clone or download ，复制地址 然后就可以在某个文件夹，右键-&gt;git bash使用命令 git clone + 已复制的https地址 上面的只能创建master分支。如何指定特定分支？ eg：git clone -b feature-edits https://github.com/Faith-Uchiha/hello-world.git git clone 分支名 repo https地址 2.git pull拉取该分支最新内容，与本地（当前电脑、文件夹）对比。就是更新该分支的。 3.git addgit add .——添加所有目录 git add 文件名——添加文件 注意此命令只是添加到了git队列，并没有真正上传到仓库分支 即使不是添加新文件，而是在旧文件上修改，想要更新到分支上，也要git add git commit git push 4.git commit -am-am 后面跟上注释，双引号 5.git push真正添加到分支。]]></content>
+    <content type="text"><![CDATA[Github1.仓库用于存放项目 2.分支master：主分支，存放最终版本代码 其他分支：对主分支的拷贝，我们在其他分支修改再合并到master。 在分支中对某个文件修改，然后Cmommit Changes就可以修改。 3.请求代码合并pull request：子分支请求和master分支进行合并，确认之后可以提交 merge pull request：确认合并到master。 如果想要删掉已经合并的分支，Delete branch 4.fork把一个repo拷贝到你的页面，你也持有该仓库的一个副本 5.watch该仓库有变更时，可以收到邮件提醒。 6.star收藏 工作流程fork一个repo作为自己的副本-&gt;用git命令修改、管理该仓库（git add 、git commit 、git push） -&gt;发起pull request，就可以把自己的修改提交给原始仓库管理者 git命令1.git clone https：//先去repo页面点绿色的Clone or download ，复制地址 然后就可以在某个文件夹，右键-&gt;git bash使用命令 git clone + 已复制的https地址 上面的只能创建master分支。如何指定特定分支？ eg：git clone -b feature-edits https://github.com/Faith-Uchiha/hello-world.git git clone 分支名 repo https地址 2.git pull拉取该分支最新内容，与本地（当前电脑、文件夹）对比。就是更新该分支的。 3.git addgit add .——添加所有目录 git add 文件名——添加文件 注意此命令只是添加到了git队列，并没有真正上传到仓库分支 即使不是添加新文件，而是在旧文件上修改，想要更新到分支上，也要git add git commit git push 4.git commit -am-am 后面跟上注释，双引号 5.git push真正添加到分支。]]></content>
       <categories>
         <category>Github和git</category>
       </categories>
@@ -66,13 +82,13 @@
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
   </entry>
   <entry>
-    <title><![CDATA[标签]]></title>
-    <url>%2Ftags%2Findex.html</url>
+    <title><![CDATA[分类]]></title>
+    <url>%2Fcategories%2Findex.html</url>
     <content type="text"></content>
   </entry>
   <entry>
-    <title><![CDATA[分类]]></title>
-    <url>%2Fcategories%2Findex.html</url>
+    <title><![CDATA[标签]]></title>
+    <url>%2Ftags%2Findex.html</url>
     <content type="text"></content>
   </entry>
 </search>
