@@ -109,7 +109,7 @@
 <meta property="og:site_name" content="My DreamLand My Avalon">
 <meta property="og:description" content="环境配置 Anaconda下载和安装。  下载网址 ，选择最新版本。   安装一路默认。 安装完后，为了快速下载各种Python包，使用下列命令，添加Anaconda仓库镜像  12345conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/conda config --add cha">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-07T07:29:16.367Z">
+<meta property="og:updated_time" content="2017-11-07T08:54:09.115Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DL开始前的准备">
 <meta name="twitter:description" content="环境配置 Anaconda下载和安装。  下载网址 ，选择最新版本。   安装一路默认。 安装完后，为了快速下载各种Python包，使用下列命令，添加Anaconda仓库镜像  12345conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/conda config --add cha">
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  179
+                  239
                 </span>
               
 
@@ -443,7 +443,7 @@
 <li>安装完后，<strong>为了快速下载各种Python包</strong>，使用下列命令，添加Anaconda仓库镜像</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</div><div class="line"></div><div class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</div><div class="line"></div><div class="line">conda config --set show_channel_urls yes</div></pre></td></tr></table></figure>
-<p>&lt;– !more –&gt;</p>
+<a id="more"></a>
 <p> 然后，比如你输入</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conda install numpy</div></pre></td></tr></table></figure>
 <p>就可以安装 numpy包。</p>
@@ -457,13 +457,23 @@
 </ul>
 </li>
 <li><p>Anaconda基础命令</p>
-<ol>
-<li><p>conda install name——安装包</p>
+<p>   2.1 管理包</p>
+<ul>
+<li>conda install name——安装包</li>
+</ul>
 <p>可以通过”=”来<strong>指定版本</strong>，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">eg：conda install numpy=1.0</div></pre></td></tr></table></figure>
 <p>可以同时安装多个包；安装某个包会自动安装它的依赖项</p>
-</li>
-</ol>
+<ul>
+<li>conda remove name——删除包</li>
+<li>conda upgrade –all——更新所有包    conda uprade name——更新某个包</li>
+<li>conda list——列出已安装的包</li>
+<li>conda search name——不知道要安装的包的确切名字，可以搜索</li>
+</ul>
+<p>3.1 管理环境</p>
+<ul>
+<li>​</li>
+</ul>
 </li>
 </ol>
 
