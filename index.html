@@ -308,6 +308,616 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://faith-uchiha.github.io/2017/11/07/DL开始前的准备/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Amaterasu.Z">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/26248309?v=4&u=679e58100f290ba420c1903074df87aacaf9f37e&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My DreamLand My Avalon">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/07/DL开始前的准备/" itemprop="url">DL开始前的准备</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-07T15:13:37+08:00">
+                2017-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+          
+          <span>
+            |
+            <span>更新于</span>
+            <time>
+              2017-11-07
+              15:13:37
+            </time>
+          </span>
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  179
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><ol>
+<li><p>Anaconda下载和安装。</p>
+<ul>
+<li><a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/" target="_blank" rel="external">下载网址</a> ，选择最新版本。   安装一路默认。</li>
+<li>安装完后，<strong>为了快速下载各种Python包</strong>，使用下列命令，添加Anaconda仓库镜像</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</div><div class="line"></div><div class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</div><div class="line"></div><div class="line">conda config --set show_channel_urls yes</div></pre></td></tr></table></figure>
+<p>&lt;– !more –&gt;</p>
+<p> 然后，比如你输入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conda install numpy</div></pre></td></tr></table></figure>
+<p>就可以安装 numpy包。</p>
+<ul>
+<li><p>添加第三方镜像/源</p>
+<p><a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="external">教程网站</a></p>
+</li>
+<li><p>更新 所有包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">conda upgrade --all</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Anaconda基础命令</p>
+<ol>
+<li><p>conda install name——安装包</p>
+<p>可以通过”=”来<strong>指定版本</strong>，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">eg：conda install numpy=1.0</div></pre></td></tr></table></figure>
+<p>可以同时安装多个包；安装某个包会自动安装它的依赖项</p>
+</li>
+</ol>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    <div>
+    
+    </div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://faith-uchiha.github.io/2017/11/07/Linux文件系统/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Amaterasu.Z">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/26248309?v=4&u=679e58100f290ba420c1903074df87aacaf9f37e&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My DreamLand My Avalon">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/07/Linux文件系统/" itemprop="url">Linux文件系统</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-07T08:29:40+08:00">
+                2017-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+          
+          <span>
+            |
+            <span>更新于</span>
+            <time>
+              2017-11-07
+              08:29:40
+            </time>
+          </span>
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux知识/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux知识</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  445
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><h3 id="1-分层"><a href="#1-分层" class="headerlink" title="1.分层"></a>1.分层</h3><p>第一层：虚拟文件系统(VFS)   第二层：具体文件系统（FATFS等）    </p>
+<p>VFS封装底层，向C标准库提供系统调用接口</p>
+<h2 id="I-O操作"><a href="#I-O操作" class="headerlink" title="I/O操作"></a>I/O操作</h2><p>Linux将设备当作文件来处理。</p>
+<h3 id="1-分类"><a href="#1-分类" class="headerlink" title="1.分类"></a>1.分类</h3><p>非缓冲式I/O操作：系统调用提供           缓冲式：C标准输入输出库函数提供</p>
+<p>非缓冲式用“文件描述符”来表示文件</p>
+<h3 id="2-文件标识符"><a href="#2-文件标识符" class="headerlink" title="2.文件标识符"></a>2.文件标识符</h3><p>0——标准输入，从键盘输入     1——标准输出，输出到终端    2——标准错误，存放错误信息的堆栈</p>
+<h3 id="3-标准I-O"><a href="#3-标准I-O" class="headerlink" title="3.标准I/O"></a>3.标准I/O</h3><p>三种缓冲类型：全缓冲、行缓冲、不带缓冲</p>
+<p>文件指针：文件的各种<strong>信息存在结构体FILE</strong>中，流（stream）用指针FILE *来描述</p>
+<h3 id="4-文件和目录操作"><a href="#4-文件和目录操作" class="headerlink" title="4.文件和目录操作"></a>4.文件和目录操作</h3><p>文件类型：</p>
+<p>​        目录文件（directory file）</p>
+<p>​        普通文件（regular file）</p>
+<p>​        字符设备文件（char device file）</p>
+<p>​        块设备文件（block device file）</p>
+<p>​        FIFO</p>
+<p>​        套接字（Socket）</p>
+<pre><code>符号链接（symbolic link）
+</code></pre><p>文件访问权限：用ls -l会看到文件具体信息，最前方的是<strong>10个字符的字符串</strong>表示文件类型和访问权限</p>
+<p>​        -rwxr-xr-x 1 root root 6444 09-22 15:33 shmwrite<br>​        -rw-r–r– 1 root root 1443 09-22 15:33 shmwrite.c<br>​        drwxr-xr-x 2 root root 4096 09-22 17:19 test</p>
+<p>​        第一个字符表示文件类型。<strong>d代表目录，-代表非目录</strong> 。 后边的都是<strong>三个字符为一组权限</strong>，          </p>
+<p>​        分三组。依次表示，<strong>所有者权限（当前用户），同组用户权限，其它用户权限</strong>。</p>
+<p>​        <strong>r,读权限；w，写权限；x，可执行权限；-没权限。</strong></p>
+<p>文件属性：判断文件存不存在可以用stat/open。</p>
+<p>​        stat结构体：st_mode——判断文件类型，比如是不是可执行文件</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    <div>
+    
+    </div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://faith-uchiha.github.io/2017/11/06/LearingGroupup-Introduction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Amaterasu.Z">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/26248309?v=4&u=679e58100f290ba420c1903074df87aacaf9f37e&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="My DreamLand My Avalon">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/06/LearingGroupup-Introduction/" itemprop="url">LearingGroupup_Introduction</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-06T23:52:58+08:00">
+                2017-11-06
+              </time>
+            
+
+            
+
+            
+          </span>
+          
+          <span>
+            |
+            <span>更新于</span>
+            <time>
+              2017-11-06
+              23:52:58
+            </time>
+          </span>
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  116
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="常见概念的关系"><a href="#常见概念的关系" class="headerlink" title="常见概念的关系"></a>常见概念的关系</h2><p>范围：人工智能&gt;机器学习&gt;深度学习。</p>
+<p>机器学习是实现人工智能的<strong>方法</strong>，深度学习是实现机器学习的<strong>技术</strong></p>
+<h2 id="提问的智慧"><a href="#提问的智慧" class="headerlink" title="提问的智慧"></a>提问的智慧</h2><p><a href="https://millearninggroup.github.io/docs/how-to-ask/" target="_blank" rel="external">网址</a></p>
+<h2 id="参考资源"><a href="#参考资源" class="headerlink" title="参考资源"></a>参考资源</h2><p>书籍：周志华《机器学习》、李航《统计学习方法》</p>
+<p>视频：台湾大学. 林轩田， Machine Learning Foundations 和 Machine Learning Techniques<br>​    台湾大学. 李宏毅， Machine Learning 和 having it deep and structured<br>​    Stanford. CS231n: Convolutional Neural Networks for Visual Recognition </p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    <div>
+    
+    </div>
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://faith-uchiha.github.io/2017/10/30/Linux下GCC编译/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -656,9 +1266,12 @@
 </li>
 <li><p>man + 命令名称  显示命令帮助  （命令不会，找男人）</p>
 </li>
-<li><p>tar<br>  -c 打包<br>  -x 解压缩<br>  -z gzip压缩格式<br>  -j bzip2格式<br>  -v 显示压缩/解压缩过程<br>  -f 指定输出文件名</p>
-<p>注意：打包后，后缀是.tar 打包并压缩后缀才是.tar.gz或.tar.bz2   </p>
-<p>例子：<br>打包并压缩 tar -czvf 指定生成的名字&lt;.tar.gz&gt; 要压缩的文件(夹)</p>
+<li><p>tar<br>  -c 打包<br>  -x 解压缩</p>
+<pre><code>-z gzip压缩格式
+-j bzip2格式
+-v 显示压缩/解压缩过程
+</code></pre><p>  -f 指定输出文件名<br>  ​<br>  注意：打包后，后缀是.tar 打包并压缩后缀才是.tar.gz或.tar.bz2   </p>
+<p>  例子：<br>  打包并压缩 tar -czvf 指定生成的名字&lt;.tar.gz&gt; 要压缩的文件(夹)</p>
 </li>
 </ol>
 <p>解压缩：tar -xzvf 压缩文件名&lt;.tar.gz&gt;</p>
@@ -1622,559 +2235,13 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://faith-uchiha.github.io/2017/08/22/指针1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Amaterasu.Z">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/26248309?v=4&u=679e58100f290ba420c1903074df87aacaf9f37e&s=400">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My DreamLand My Avalon">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/22/指针1/" itemprop="url">指针1</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-22T15:52:55+08:00">
-                2017-08-22
-              </time>
-            
-
-            
-
-            
-          </span>
-          
-          <span>
-            |
-            <span>更新于</span>
-            <time>
-              2017-08-22
-              15:52:55
-            </time>
-          </span>
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/C语言巩固——《C和指针》读书笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">C语言巩固——《C和指针》读书笔记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  68
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>之前学C语言的时候，指针这一块总觉得很难，一直没有信心完全弄明白。</p>
-<p>看过一遍书之后，知识点记得几天然后马上就忘记了。</p>
-<p>这次争取完全理解，并且能够熟练应用！</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/22/指针1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    <div>
-    
-    </div>
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://faith-uchiha.github.io/2017/08/16/First/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Amaterasu.Z">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/26248309?v=4&u=679e58100f290ba420c1903074df87aacaf9f37e&s=400">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My DreamLand My Avalon">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/16/First/" itemprop="url">First</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-16T21:58:18+08:00">
-                2017-08-16
-              </time>
-            
-
-            
-
-            
-          </span>
-          
-          <span>
-            |
-            <span>更新于</span>
-            <time>
-              2017-08-18
-              18:38:45
-            </time>
-          </span>
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/初入博客/" itemprop="url" rel="index">
-                    <span itemprop="name">初入博客</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  254
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>这是我建博客后尝试写的一个.md测试</p>
-<h1 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a>遇到的坑</h1><h2 id="1-yilia主题的所有文章按钮"><a href="#1-yilia主题的所有文章按钮" class="headerlink" title="1.yilia主题的所有文章按钮"></a>1.yilia主题的所有文章按钮</h2><p>总算是所有东西都弄好了，弄“所有文章”的显示的时候，竟然报错</p>
-<p><strong>ERROR plugin load failed hexo-generator-json-content</strong></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/16/First/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    <div>
-    
-    </div>
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://faith-uchiha.github.io/2017/08/16/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Amaterasu.Z">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/26248309?v=4&u=679e58100f290ba420c1903074df87aacaf9f37e&s=400">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="My DreamLand My Avalon">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/08/16/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-16T19:42:04+08:00">
-                2017-08-16
-              </time>
-            
-
-            
-
-            
-          </span>
-          
-          <span>
-            |
-            <span>更新于</span>
-            <time>
-              Invalid date
-              Invalid date
-            </time>
-          </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  78
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/08/16/hello-world/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    <div>
-    
-    </div>
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -2218,7 +2285,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2229,7 +2296,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2240,7 +2307,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
