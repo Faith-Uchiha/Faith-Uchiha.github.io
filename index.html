@@ -596,7 +596,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  445
+                  442
                 </span>
               
 
@@ -634,32 +634,15 @@
 
       
         
-          
-            <h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><h3 id="1-分层"><a href="#1-分层" class="headerlink" title="1.分层"></a>1.分层</h3><p>第一层：虚拟文件系统(VFS)   第二层：具体文件系统（FATFS等）    </p>
+          <h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><h3 id="1-分层"><a href="#1-分层" class="headerlink" title="1.分层"></a>1.分层</h3><p>第一层：虚拟文件系统(VFS)   第二层：具体文件系统（FATFS等）    </p>
 <p>VFS封装底层，向C标准库提供系统调用接口</p>
-<h2 id="I-O操作"><a href="#I-O操作" class="headerlink" title="I/O操作"></a>I/O操作</h2><p>Linux将设备当作文件来处理。</p>
-<h3 id="1-分类"><a href="#1-分类" class="headerlink" title="1.分类"></a>1.分类</h3><p>非缓冲式I/O操作：系统调用提供           缓冲式：C标准输入输出库函数提供</p>
-<p>非缓冲式用“文件描述符”来表示文件</p>
-<h3 id="2-文件标识符"><a href="#2-文件标识符" class="headerlink" title="2.文件标识符"></a>2.文件标识符</h3><p>0——标准输入，从键盘输入     1——标准输出，输出到终端    2——标准错误，存放错误信息的堆栈</p>
-<h3 id="3-标准I-O"><a href="#3-标准I-O" class="headerlink" title="3.标准I/O"></a>3.标准I/O</h3><p>三种缓冲类型：全缓冲、行缓冲、不带缓冲</p>
-<p>文件指针：文件的各种<strong>信息存在结构体FILE</strong>中，流（stream）用指针FILE *来描述</p>
-<h3 id="4-文件和目录操作"><a href="#4-文件和目录操作" class="headerlink" title="4.文件和目录操作"></a>4.文件和目录操作</h3><p>文件类型：</p>
-<p>​        目录文件（directory file）</p>
-<p>​        普通文件（regular file）</p>
-<p>​        字符设备文件（char device file）</p>
-<p>​        块设备文件（block device file）</p>
-<p>​        FIFO</p>
-<p>​        套接字（Socket）</p>
-<pre><code>符号链接（symbolic link）
-</code></pre><p>文件访问权限：用ls -l会看到文件具体信息，最前方的是<strong>10个字符的字符串</strong>表示文件类型和访问权限</p>
-<p>​        -rwxr-xr-x 1 root root 6444 09-22 15:33 shmwrite<br>​        -rw-r–r– 1 root root 1443 09-22 15:33 shmwrite.c<br>​        drwxr-xr-x 2 root root 4096 09-22 17:19 test</p>
-<p>​        第一个字符表示文件类型。<strong>d代表目录，-代表非目录</strong> 。 后边的都是<strong>三个字符为一组权限</strong>，          </p>
-<p>​        分三组。依次表示，<strong>所有者权限（当前用户），同组用户权限，其它用户权限</strong>。</p>
-<p>​        <strong>r,读权限；w，写权限；x，可执行权限；-没权限。</strong></p>
-<p>文件属性：判断文件存不存在可以用stat/open。</p>
-<p>​        stat结构体：st_mode——判断文件类型，比如是不是可执行文件</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/07/Linux文件系统/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
