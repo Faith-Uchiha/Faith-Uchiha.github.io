@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[DL开始前的准备]]></title>
     <url>%2F2017%2F11%2F07%2FDL%E5%BC%80%E5%A7%8B%E5%89%8D%E7%9A%84%E5%87%86%E5%A4%87%2F</url>
-    <content type="text"><![CDATA[环境配置 Anaconda下载和安装。 下载网址 ，选择最新版本。 安装一路默认。 安装完后，为了快速下载各种Python包，使用下列命令，添加Anaconda仓库镜像 12345conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/conda config --set show_channel_urls yes 然后，比如你输入 1conda install numpy 就可以安装 numpy包。 添加第三方镜像/源 教程网站 更新 所有包 1conda upgrade --all Anaconda基础命令 2.1 管理包 conda install name——安装包 可以通过”=”来指定版本， 1eg：conda install numpy=1.0 可以同时安装多个包；安装某个包会自动安装它的依赖项 conda remove name——删除包 conda upgrade –all——更新所有包 conda uprade name——更新某个包 conda list——列出已安装的包 conda search name——不知道要安装的包的确切名字，可以搜索 3.1 管理环境 ​]]></content>
+    <content type="text"><![CDATA[环境配置 Anaconda下载和安装。 下载网址 ，选择最新版本。 安装一路默认。 安装完后，为了快速下载各种Python包，使用下列命令，添加Anaconda仓库镜像 12345conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/conda config --set show_channel_urls yes 然后，比如你输入 1conda install numpy 就可以安装 numpy包。 添加第三方镜像/源 教程网站 更新 所有包 1conda upgrade --all Anaconda基础命令 管理包 conda install name——安装包 可以通过”=”来指定版本， 1eg：conda install numpy=1.0 ​ 可以同时安装多个包；安装某个包会自动安装它的依赖项 conda remove name——删除包 conda upgrade –all——更新所有包 conda uprade name——更新某个包 conda list——列出已安装的包 conda search name——不知道要安装的包的确切名字，可以搜索 管理环境 conda create -n env_name list_of_packages ——创建环境 ​ -n env_name表示指定环境的名称 后面跟着的是要安装在环境的包列表（即一次安装多个包）名称 创建环境对使用不同版本的Python很有利，可以在Python2.x和Python3.x中自由切换。例子如下 12conda create -n py2 python=2conda create -n py3 python=3 ​ 上面的写法，安装的是Python2和Python3最新版，如果想安装具体的，要写=2.x activate env_name——进入环境 在环境中，也可以用包管理的基础命令（conda install/list等） deactivate——离开环境 conda info -e/conda env list ——列出所有环境 当前正在使用的环境，会有一个* conda env remove -n name/conda remove -n name –all ——删除环境。name是环境名称 conda env export &gt; environment.yaml——把环境以及已经安装的包导出到.yaml文件 conda env create -f xxx.yaml——通过环境文件来创建环境 Jupyter Notebook操作 在Anaconda Prompt中输入 1jupyter notebook 就会在浏览器中打开 改变打开的路径 输入命令： 1jupyter notebook --generate-config 会 显示jupyter_notebook_config.py文件路径，打开并找到 12## The directory to use for notebooks and kernels. #c.NotebookApp.notebook_dir = &apos;&apos; 改为 12## The directory to use for notebooks and kernels. c.NotebookApp.notebook_dir = &apos;你要设置的Notebook路径&apos; 关闭正在运行的notebook 在tab里的Running中 关闭 notebook的操作： shift + enter：一步一步执行 菜单的Cell-&gt;Run All：一次全部执行 ​]]></content>
       <categories>
         <category>机器学习</category>
       </categories>
@@ -112,13 +112,13 @@
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>
   </entry>
   <entry>
-    <title><![CDATA[标签]]></title>
-    <url>%2Ftags%2Findex.html</url>
+    <title><![CDATA[分类]]></title>
+    <url>%2Fcategories%2Findex.html</url>
     <content type="text"></content>
   </entry>
   <entry>
-    <title><![CDATA[分类]]></title>
-    <url>%2Fcategories%2Findex.html</url>
+    <title><![CDATA[标签]]></title>
+    <url>%2Ftags%2Findex.html</url>
     <content type="text"></content>
   </entry>
 </search>

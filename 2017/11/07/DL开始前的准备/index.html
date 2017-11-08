@@ -109,7 +109,7 @@
 <meta property="og:site_name" content="My DreamLand My Avalon">
 <meta property="og:description" content="环境配置 Anaconda下载和安装。  下载网址 ，选择最新版本。   安装一路默认。 安装完后，为了快速下载各种Python包，使用下列命令，添加Anaconda仓库镜像  12345conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/conda config --add cha">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-07T08:54:09.115Z">
+<meta property="og:updated_time" content="2017-11-08T02:25:22.717Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DL开始前的准备">
 <meta name="twitter:description" content="环境配置 Anaconda下载和安装。  下载网址 ，选择最新版本。   安装一路默认。 安装完后，为了快速下载各种Python包，使用下列命令，添加Anaconda仓库镜像  12345conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/conda config --add cha">
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  239
+                  592
                 </span>
               
 
@@ -415,7 +415,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -457,25 +457,79 @@
 </ul>
 </li>
 <li><p>Anaconda基础命令</p>
-<p>   2.1 管理包</p>
 <ul>
-<li>conda install name——安装包</li>
-</ul>
+<li><p>管理包</p>
+<ul>
+<li><p>conda install name——安装包</p>
 <p>可以通过”=”来<strong>指定版本</strong>，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">eg：conda install numpy=1.0</div></pre></td></tr></table></figure>
-<p>可以同时安装多个包；安装某个包会自动安装它的依赖项</p>
-<ul>
-<li>conda remove name——删除包</li>
-<li>conda upgrade –all——更新所有包    conda uprade name——更新某个包</li>
-<li>conda list——列出已安装的包</li>
-<li>conda search name——不知道要安装的包的确切名字，可以搜索</li>
+<p>​ 可以同时安装多个包；安装某个包会自动安装它的依赖项</p>
+</li>
+<li><p>conda remove name——删除包</p>
+</li>
+<li><p>conda upgrade –all——更新所有包    conda uprade name——更新某个包</p>
+</li>
+<li><p>conda list——列出已安装的包</p>
+</li>
+<li><p>conda search name——不知道要安装的包的确切名字，可以搜索</p>
+</li>
 </ul>
-<p>3.1 管理环境</p>
+</li>
+<li><p>管理环境</p>
 <ul>
-<li>​</li>
+<li><p>conda create -n env_name list_of_packages ——创建环境</p>
+<p>​   -n env_name表示<strong>指定</strong>环境的<strong>名称</strong>     后面跟着的是<strong>要安装</strong>在环境<strong>的包列表（即一次安装多个包）名称</strong> </p>
+<p><strong>创建环境</strong>对使用<strong>不同版本的Python</strong>很有利，可以在Python2.x和Python3.x中自由切换。例子如下</p>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">conda create -n py2 python=2</div><div class="line">conda create -n py3 python=3</div></pre></td></tr></table></figure>
+</code></pre><p>​ 上面的写法，安装的是Python2和Python3<strong>最新版</strong>，如果想安装具体的，要写=2.x</p>
+</li>
+<li><p>activate env_name——进入环境</p>
+<p>在环境中，也可以用包管理的基础命令（conda install/list等）        </p>
+</li>
+<li><p>deactivate——离开环境</p>
+</li>
+<li><p>conda info -e/conda env list ——列出所有环境</p>
+<p>当前正在使用的环境，会有一个*</p>
+</li>
+<li><p>conda env remove -n name/conda remove -n name –all ——删除环境。name是环境名称</p>
+</li>
+<li><p>conda env export &gt; environment.yaml——把<strong>环境</strong>以及已经安装的包<strong>导出</strong>到.yaml文件</p>
+</li>
+<li><p>conda env create -f xxx.yaml——<strong>通过环境文件</strong>来创建环境</p>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ol>
+<ol>
+<li><p>Jupyter Notebook操作</p>
+<ul>
+<li><p>在Anaconda Prompt中输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jupyter notebook</div></pre></td></tr></table></figure>
+<p>就会在浏览器中打开</p>
+</li>
+<li><p>改变打开的路径</p>
+<p>输入命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jupyter notebook --generate-config</div></pre></td></tr></table></figure>
+<p>会 显示jupyter_notebook_config.py文件路径，打开并找到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## The directory to use for notebooks and kernels. </div><div class="line">#c.NotebookApp.notebook_dir = &apos;&apos;</div></pre></td></tr></table></figure>
+<p>改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## The directory to use for notebooks and kernels. </div><div class="line">c.NotebookApp.notebook_dir = &apos;你要设置的Notebook路径&apos;</div></pre></td></tr></table></figure>
+</li>
+<li><p>关闭正在运行的notebook</p>
+<p>在tab里的Running中 关闭</p>
+</li>
+<li><p>notebook的操作：</p>
+<ul>
+<li>shift + enter：一步一步执行</li>
+<li>菜单的Cell-&gt;Run All：一次全部执行</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>​          </p>
 
       
     </div>
