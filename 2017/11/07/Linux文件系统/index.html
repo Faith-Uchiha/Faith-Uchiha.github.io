@@ -108,7 +108,7 @@
 <meta property="og:site_name" content="My DreamLand My Avalon">
 <meta property="og:description" content="文件系统1.分层第一层：虚拟文件系统(VFS)   第二层：具体文件系统（FATFS等）     VFS封装底层，向C标准库提供系统调用接口">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-07T04:32:04.075Z">
+<meta property="og:updated_time" content="2017-11-08T02:46:44.885Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux文件系统">
 <meta name="twitter:description" content="文件系统1.分层第一层：虚拟文件系统(VFS)   第二层：具体文件系统（FATFS等）     VFS封装底层，向C标准库提供系统调用接口">
@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  446
+                  442
                 </span>
               
 
@@ -444,7 +444,8 @@
 <h3 id="2-文件标识符"><a href="#2-文件标识符" class="headerlink" title="2.文件标识符"></a>2.文件标识符</h3><p>0——标准输入，从键盘输入     1——标准输出，输出到终端    2——标准错误，存放错误信息的堆栈</p>
 <h3 id="3-标准I-O"><a href="#3-标准I-O" class="headerlink" title="3.标准I/O"></a>3.标准I/O</h3><p>三种缓冲类型：全缓冲、行缓冲、不带缓冲</p>
 <p>文件指针：文件的各种<strong>信息存在结构体FILE</strong>中，流（stream）用指针FILE *来描述</p>
-<h3 id="4-文件和目录操作"><a href="#4-文件和目录操作" class="headerlink" title="4.文件和目录操作"></a>4.文件和目录操作</h3><h4 id="文件类型："><a href="#文件类型：" class="headerlink" title="文件类型："></a>文件类型：</h4><ul>
+<h3 id="4-文件和目录操作"><a href="#4-文件和目录操作" class="headerlink" title="4.文件和目录操作"></a>4.文件和目录操作</h3><p>文件类型：</p>
+<ul>
 <li>目录文件（directory file）        </li>
 <li>普通文件（regular file）        </li>
 <li>字符设备文件（char device file）</li>
@@ -453,13 +454,14 @@
 <li>套接字（Socket）</li>
 <li>符号链接（symbolic link）</li>
 </ul>
-<h4 id="文件访问权限："><a href="#文件访问权限：" class="headerlink" title="文件访问权限："></a>文件访问权限：</h4><p>​    用ls -l会看到文件具体信息，最前方的是<strong>10个字符的字符串</strong>表示文件类型和访问权限</p>
-<p>​        <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">​		 -rwxr-xr-x 1 root root 6444 09-22 15:33 shmwrite</div><div class="line">​		-rw-r--r-- 1 root root 1443 09-22 15:33 shmwrite.c</div><div class="line">​		drwxr-xr-x 2 root root 4096 09-22 17:19 test</div></pre></td></tr></table></figure></p>
+<p>文件访问权限：</p>
+<p>​    用ls -l会看到文件具体信息，最前方的是<strong>10个字符的字符串</strong>表示文件类型和访问权限</p>
+<p>​        <figure class="highlight plain"><figcaption><span>1 root root 6444 09-22 15:33 shmwrite</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">​		-rw-r--r-- 1 root root 1443 09-22 15:33 shmwrite.c</div><div class="line">​		drwxr-xr-x 2 root root 4096 09-22 17:19 test</div></pre></td></tr></table></figure></p>
 <p>​        第一个字符表示文件类型。<strong>d代表目录，-代表非目录</strong> 。 后边的都是<strong>三个字符为一组权限</strong>，          </p>
 <p>​        分三组。依次表示，<strong>所有者权限（当前用户），同组用户权限，其它用户权限</strong>。</p>
 <p>​        <strong>r,读权限；w，写权限；x，可执行权限；-没权限。</strong></p>
-<h4 id="文件属性："><a href="#文件属性：" class="headerlink" title="文件属性："></a>文件属性：</h4><p>​        判断文件存不存在可以用stat/open。</p>
-<p>​        stat结构体：st_mode——判断文件类型，比如是不是可执行文件</p>
+<p>文件属性：判断文件存不存在可以用stat/open。</p>
+<p>​    stat结构体：st_mode——判断文件类型，比如是不是可执行文件</p>
 
       
     </div>
@@ -655,7 +657,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统"><span class="nav-number">1.</span> <span class="nav-text">文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-分层"><span class="nav-number">1.1.</span> <span class="nav-text">1.分层</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I-O操作"><span class="nav-number">2.</span> <span class="nav-text">I/O操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-分类"><span class="nav-number">2.1.</span> <span class="nav-text">1.分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-文件标识符"><span class="nav-number">2.2.</span> <span class="nav-text">2.文件标识符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-标准I-O"><span class="nav-number">2.3.</span> <span class="nav-text">3.标准I/O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-文件和目录操作"><span class="nav-number">2.4.</span> <span class="nav-text">4.文件和目录操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文件类型："><span class="nav-number">2.4.1.</span> <span class="nav-text">文件类型：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件访问权限："><span class="nav-number">2.4.2.</span> <span class="nav-text">文件访问权限：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文件属性："><span class="nav-number">2.4.3.</span> <span class="nav-text">文件属性：</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统"><span class="nav-number">1.</span> <span class="nav-text">文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-分层"><span class="nav-number">1.1.</span> <span class="nav-text">1.分层</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#I-O操作"><span class="nav-number">2.</span> <span class="nav-text">I/O操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-分类"><span class="nav-number">2.1.</span> <span class="nav-text">1.分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-文件标识符"><span class="nav-number">2.2.</span> <span class="nav-text">2.文件标识符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-标准I-O"><span class="nav-number">2.3.</span> <span class="nav-text">3.标准I/O</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-文件和目录操作"><span class="nav-number">2.4.</span> <span class="nav-text">4.文件和目录操作</span></a></li></ol></li></ol></div>
             
 
           </div>
