@@ -398,7 +398,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  445
+                  516
                 </span>
               
 
@@ -446,8 +446,10 @@
 <p>文件指针：文件的各种<strong>信息存在结构体FILE</strong>中，流（stream）用指针FILE *来描述</p>
 <h3 id="4-文件和目录操作"><a href="#4-文件和目录操作" class="headerlink" title="4.文件和目录操作"></a>4.文件和目录操作</h3><p>文件类型：</p>
 <ul>
-<li>目录文件（directory file）        </li>
-<li>普通文件（regular file）        </li>
+<li>目录文件（directory file）        <ul>
+<li>普通文件（regular file）    </li>
+</ul>
+</li>
 <li>字符设备文件（char device file）</li>
 <li>块设备文件（block device file）</li>
 <li>FIFO</li>
@@ -461,6 +463,10 @@
 <p>​    r,读权限；w，写权限；x，可执行权限；-没权限。**</p>
 <p>文件属性：判断文件存不存在可以用stat/open。</p>
 <p>​    stat结构体：st_mode——判断文件类型，比如是不是可执行文件</p>
+<p>常用函数：</p>
+<p>stat：可以获取文件的一些状态：大小、修改时间等。结果保存在stat结构体变量里。</p>
+<p>DIR <em> opendir(const char </em> name)：打开文件夹，返回值是DIR *类型</p>
+<p>struct dirent <em> readdir(DIR </em> dir)：<strong>联合while，可遍历</strong>文件夹内所有文件。</p>
 
       
     </div>
@@ -586,7 +592,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -597,7 +603,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -608,7 +614,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
