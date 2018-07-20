@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title>Leetcode167题解</title>
+      <link href="/2018/04/23/Leetcode167%E9%A2%98%E8%A7%A3/"/>
+      <content type="html"><![CDATA[<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>给定一个升序排列的数组和目标和target。试找出数组中两个元素相加之和等于target的元素索引（下标+1） 题目限制：index1&lt;index2      题目提示：可认为给定数组有且只有一组解，并且不会使用相同元素两次</p><a id="more"></a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">样例：</span><br><span class="line">Input: numbers=&#123;2, 7, 11, 15&#125;, target=9</span><br><span class="line">Output: index1=1, index2=2</span><br></pre></td></tr></table></figure><h2 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h2><p>解法一：暴力解答。直接双重for循环遍历，尝试所有可能结果。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">int flag=0;</span><br><span class="line">int sum=0;</span><br><span class="line"></span><br><span class="line">for(int i=0;i&lt;numbers.length;i++) &#123;</span><br><span class="line">for(int j=i+1;j&lt;numbers.length;j++) &#123;</span><br><span class="line">sum = numbers[i]+numbers[j];</span><br><span class="line">if(sum&gt;target) break;</span><br><span class="line">if(sum==target)</span><br><span class="line">&#123;</span><br><span class="line">result[0]=i+1; //+1只是为了满足题意</span><br><span class="line">result[1]=j+1;</span><br><span class="line">flag=1;</span><br><span class="line">break;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">if(flag==1)</span><br><span class="line">break;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">return result;</span><br></pre></td></tr></table></figure><p>此种方法效率极低，跑分112ms</p><p>解法二：设定两个指针left，right（其实就是两个变量，充当下标）。一个在数组头，一个在数组尾。<br>当left\&lt;right时执行循环体。循环体中：对left和right所指的元素求和，存储于变量v，比较v和target的大小，如果相等，退出循环；如果v>target，则right往前移动；如果v\&lt;target则left往后移动。<br> 这样可以排除一些不可能的情况，减少遍历，快速找到解所在区间。<br> 比如说：left=0  right=k 。此时k指向的元素加上left指向的元素，和比target小，不能再往前推进了；但是，往后，k+1位置，又比target大。所以只能调整left。left分析也是类似，left往后走，直到不能再走了（v&gt;target)又调整right。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">int[] indice = new int[2];</span><br><span class="line">        if (num == null || num.length &lt; 2) return indice;</span><br><span class="line">        int left = 0, right = num.length - 1;</span><br><span class="line">        while (left &lt; right) &#123;</span><br><span class="line">            int v = num[left] + num[right];</span><br><span class="line">            if (v == target) &#123;</span><br><span class="line">                indice[0] = left + 1;</span><br><span class="line">                indice[1] = right + 1;</span><br><span class="line">                break;</span><br><span class="line">            &#125; else if (v &gt; target) &#123;</span><br><span class="line">                right --;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                left ++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return indice;</span><br></pre></td></tr></table></figure><h2 id="反思"><a href="#反思" class="headerlink" title="反思"></a>反思</h2><p>最开始的时候想到了设定两个双指针的方法，不过陷入了一个误区：两个指针同时运动，left往后的同时right往前，这样就少了很多种组合，人为的认定解只能出现在离数组对称轴距离相等的两侧。<br> 而且<strong>拿天平打比方</strong> ，num<a href="增大">left\</a>+num<a href="减小">right\</a> ==== target   <strong>同时增大一个数和减小一个数</strong>，最终变化趋势如何，也不能确定啊。</p><p>正确的做法就是固定一个数，改变另一个数（有点像高中的控制变量法）</p><p><a href="https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/" target="_blank" rel="noopener">原题链接</a></p>]]></content>
+      
+      <categories>
+          
+          <category> LeetCode刷题心得 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Array </tag>
+            
+            <tag> Double Pointer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Linux环境安装redis</title>
+      <link href="/2018/04/01/Linux%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85redis/"/>
+      <content type="html"><![CDATA[<ol><li>yum install gcc-c++。 为编译做准备</li><li>通过SSH将redis-版本.tar.gz 发送到Linux某个文件夹。Linux的Terminal下，进入文件夹，解压压缩包到指定路径  tar -xvf redis-版本.tar.gz -C /usr/local/</li><li>进入解压出来的文件夹redis-版本号，<strong>输入命令make编译</strong> ，这个时候只是编译出来了可执行文件，redis还未安装</li><li>使用 make PREFIX=/usr/local/redis install，安装redis到/usr/local/redis目录</li><li>cd ..  —&gt; cd redis  -&gt;cd bin  —&gt;./redis-server   就将redis启动了</li><li>重新打开一个Linux连接，再进入相同的目录，就会发现一个<strong>redis-cli </strong> ，是为客户端连接redis准备的</li></ol><p>上面的启动叫做前端启动模式，下面介绍后端启动</p><ol><li>将redis-版本号 文件夹内的redis.conf 复制到 /usr/local/redis/bin/下</li><li>修改redis.conf配置文件，<strong>daemonize yes</strong> </li><li>启动时，要指定配置文件  ./redis-server redis.conf</li><li>关闭：ps -ef | redis     kill -9  进程号  （不推荐<strong>这种方法，redis持久化</strong>数据丢失<strong>）<br> </strong>正确**姿势：./server-cli shutdown</li><li>开启6379端口：/sbin/iptables -I INPUT -p tcp –dport 6379 -j ACCEPT<br> /etc/rc.d/init.d/iptables save  <strong>为了jedis访问</strong></li></ol>]]></content>
+      
+      <categories>
+          
+          <category> 部署 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> Redis </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>在Linux 上部署开发好的Web应用</title>
+      <link href="/2018/04/01/%E5%9C%A8Linux%E4%B8%8A%E9%83%A8%E7%BD%B2%E5%BC%80%E5%8F%91%E5%A5%BD%E7%9A%84Web%E5%BA%94%E7%94%A8/"/>
+      <content type="html"><![CDATA[<h2 id="Web应用导入Linux"><a href="#Web应用导入Linux" class="headerlink" title="Web应用导入Linux"></a>Web应用导入Linux</h2><ol><li>Eclipse中，在相应的Web项目右键-&gt;Export-&gt;war file</li><li>利用SSH连接上Linux，在Linux中开启Tomcat，把<strong>War包扔到tomcat目录下的Webapps文件夹</strong>下，会自动解压 （如果<strong>没看到解压，请在SSH中刷新一下</strong>，就可看到已经解压；若仍未解压，请检查tomcat服务器是否开启）</li></ol><h2 id="导入Web应用所需数据库"><a href="#导入Web应用所需数据库" class="headerlink" title="导入Web应用所需数据库"></a>导入Web应用所需数据库</h2><ol><li>在Navicat中，在本机数据库名右键-&gt;转储SQL文件。导出已开发好的数据库中所有的表</li><li>在Navicat中连接到远程Linux机器的数据库，新建数据库-&gt;右键-&gt;运行SQL文件，就将本地的数据库导到远端机器里了，这样web应用就可以运行。</li></ol><p>注意：一定要在Linux虚拟机中启动tomcat服务，在SSH中双击startup.sh是没有用的。</p>]]></content>
+      
+      <categories>
+          
+          <category> 部署 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+            <tag> Web应用 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>JavaWeb问题汇总</title>
+      <link href="/2018/03/24/JavaWeb%E9%97%AE%E9%A2%98%E6%B1%87%E6%80%BB/"/>
+      <content type="html"><![CDATA[<ol><li><p>使用BeanUtils包出现下列问题</p><ul><li>java.lang.<strong>ClassNotFoundException</strong>: org.apache.commons.<strong>collections</strong>.FastHashMap</li><li>java.lang.<strong>ClassNotFoundException</strong>: org.apache.commons.<strong>logging</strong>.LogFactory</li></ul><p>像这种ClassNotFoundException  的错误，一般都是<strong>缺少了</strong>此包所需的<strong>依赖包</strong> </p><ul><li>java.lang.NoClassDefFoundError: org/apache/commons/collections/FastHashMap</li></ul><p>这样的问题就属于<strong>版本问题</strong>。 原因就是在commons-collection-4.X以上的包中不存在FastHashMap方法，<strong>解决方案也很简单，替换成commons-collection-3.2版本的包就可以</strong></p></li><li><p>写后台管理页面的增删改查时，发现删除商品信息一直无法删除。<br> <strong>现象</strong>：直接在浏览器访问AdminDelProductServlet?pid=xxxx  发现可以删除，<br> 在Eclipse自带的网页浏览器，在Debug模式下访问jsp并删除，偶尔删除。<br> 但是直接在本机浏览器，点红色删除按钮，竟然没有任何反应，在Servlet中<strong>为了调试</strong>，也加了<strong>System.out.println(request.getParameter(“pid”))  看看是否能正确输出</strong> 。发现根本就没有输出。<br> <strong>可以判断</strong>：jsp的请求，没有传递到相应的AdminDelProductServlet。随即<strong>去看web.xml是否路径错误</strong>。大眼瞪小眼看了好多遍了，都没错啊。真的纳闷。又想是不是url太长了，超过了HTTP的限制？？最后实在没办法，用WinMerge对比实例文件和自己写的文件的区别。竟然是一个很囧的错误。</p><p>竟然把</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;td align=&quot;center&quot; style=&quot;HEIGHT: 22px&quot;&gt;</span><br><span class="line">&lt;a href=&quot;javascript:void(0);&quot; onclick=&quot;delProduct(&apos;$&#123;product.pid&#125;&apos;)&quot;&gt; &lt;img</span><br><span class="line">src=&quot;$&#123;pageContext.request.contextPath&#125;/images/i_del.gif&quot;</span><br><span class="line">width=&quot;16&quot; height=&quot;16&quot; border=&quot;0&quot; style=&quot;CURSOR: hand&quot;&gt;</span><br><span class="line">&lt;/a&gt;</span><br><span class="line">&lt;/td&gt;</span><br></pre></td></tr></table></figure><p>错写成了</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;td align=&quot;center&quot; style=&quot;HEIGHT: 22px&quot;&gt;</span><br><span class="line">&lt;a href=&quot;javascipt:void(0);&quot; onclick=&quot;delProduct(&apos;$&#123;product.pid&#125;&apos;)&quot;&gt; &lt;img</span><br><span class="line">src=&quot;$&#123;pageContext.request.contextPath&#125;/images/i_del.gif&quot;</span><br><span class="line">width=&quot;16&quot; height=&quot;16&quot; border=&quot;0&quot; style=&quot;CURSOR: hand&quot;&gt;</span><br><span class="line">&lt;/a&gt;</span><br><span class="line">&lt;/td&gt;</span><br></pre></td></tr></table></figure><p>javascript没写对。真的尴尬啊。我说怎么请求传递不过去。。浪费好多时间。 <a id="more"></a></p></li><li><p>javax.el.<strong>PropertyNotFoundException</strong>: Property [Beans] not found on type [com.Amaterasu.Z.vo.PageBean]<br> 这类问题肯定是因为JavaBean没写对。JavaBean的成员变量，<strong>一定要小写开头</strong> </p></li><li><p>named-config with name ‘Amaterasu’ does not exist. Using default-config.<br> java.sql.SQLException:<strong>No suitable driver </strong>  <br> 用的好好的数据库连接池配置和jar包，换了一个新的工程突然间出问题了。实现的功能仅仅是登陆，登陆的时候把username，password发送到服务器，在DAO层进行数据查询。<br> 做了很多种尝试 <br></p><ul><li>重启服务器 ，重新发布工程—–无果 </li><li>彻底删除工程，再新建。—–仍然有问题</li></ul><p>和以前的工程对比，发现，原来是c3p0的<strong>配置文件没有复制到src文件夹下面</strong></p><p>注意：把配置文件放在WEB-INF的lib文件夹还是不够的！！！！！</p><p>这种连接池的问题，<strong>观察控制台打印的初始化池子的参数</strong> 是一个很好的查错方法，我发现，控制台输出</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">driverClass -&gt; null,jdbcUrl -&gt; null</span><br></pre></td></tr></table></figure><p>即使是default-config ，我也写了数据库连接的URL和数据库驱动。所以得知肯定是<strong>C3P0配置文件路径问题</strong> </p></li><li><p>Jedis访问Redis出现问题。<br> 出现的第一个问题是：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">JedisConnectionException: java.net.ConnectException: Connection refused: connect</span><br></pre></td></tr></table></figure><p>解决：Redis的配置文件redis.conf里bind 127.0.0.1 注释掉。</p><p>注释掉之后，会出现下面的问题</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis.clients.jedis.exceptions.JedisDataException: DENIED Redis is running in protected mode because protected mode is enabled, no bind address was specified, no authentication password is requested to clients. In this mode connections are only accepted from the loopback interface.</span><br></pre></td></tr></table></figure><p>大意就是保护模式开启了，只能从本机环回地址访问。错误也提供了下面的解决方法</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">If you want to connect from external computers to Redis you may adopt one of the following solutions: 1) Just disable protected mode sending the command &apos;CONFIG SET protected-mode no&apos; from the loopback interface by connecting to Redis from the same host the server is running, however MAKE SURE Redis is not publicly accessible from internet if you do so. Use CONFIG REWRITE to make this change permanent. </span><br><span class="line">2) Alternatively you can just disable the protected mode by editing the Redis configuration file, and setting the protected mode option to &apos;no&apos;, and then restarting the server.</span><br><span class="line">3) If you started the server manually just for testing, restart it with the &apos;--protected-mode no&apos; option. </span><br><span class="line">4) Setup a bind address or an authentication password. NOTE: You only need to do one of the above things in order for the server to start accepting connections from the outside.</span><br></pre></td></tr></table></figure></li><li><p>报错：org.apache.jasper.JasperException: javax.el.ELException: Failed to parse the expression [${}]<br> 解决：意思是无法解析\${},所以可以确定是jsp书写除了问题，导致转换成的servlet出错。问题定位了好久才定位到是header.jsp出问题，可是看了好久header.jsp，也没什么错误。<br> <br> 最终才发现罪魁祸首是自己<strong>在注释中写了\${}</strong>。。。 <br> 教训：jsp是要翻译成servlet的。在<strong>servlet中，会调用相应的类解析EL表达式，所以jsp中所有的\${}都会被解析</strong>，即使是在注释中也别轻易写\${}(在&lt;%– –%&gt;中写可能不会出问题，没事过)。</p></li><li><p>“添加购物车”按钮点击无反应。<br> 错误写法：\<a href="javasripte:void(0);" target="_blank" rel="noopener">\<input type="button" onclick="">\</a> ，这样的想法就是点击a标签，不做任何跳转，通过button的事件跳转到servlet。<br> 这两个标签是嵌套的，\<a>都说不做任何跳转了，就不会执行input的事件。<br> 解决：onclick事件必须写在\<a>里</a></a></p></li><li><p>做购物车功能时，感觉只能添加一件商品，每次跳转到cart.jsp后，总是只显示最新的商品，之前的商品都不见了。<strong>Debug发现，session.setAtrribute()好像都没执行，session都没写进去</strong>。自己写了一个小的测试程序，发现session功能一切正常，百思不得其解。<br> 最后发现，点击“加入购物车”按钮之后，跳转到了<a href="http://localhost:80**//**MyShop/product?method=productInfo&amp;pid=1&amp;cid=1&amp;currentPage=1" target="_blank" rel="noopener">http://localhost:80**//**MyShop/product?method=productInfo&amp;pid=1&amp;cid=1&amp;currentPage=1</a>  页面。<br> 这个URL很奇怪，估计是这个问题导致的session无法写入<br> 检查发现：原来是我在按钮的onclick事件里，写了<br>location.href =”<strong><a href="http://localhost:8080/" target="_blank" rel="noopener">http://localhost:8080/</a></strong>\${pageContext.request.contextPath }/product?method=addCart&amp;count=”+count+”&amp;pid=”+pid<br> <strong>在\${pageContext.request.contextPath} 前面写localhost 完全是多余的</strong></p></li><li><p>使用response的重定向功能，发现<strong>跳转到myshop/cart.jsp去了</strong> <br> 解决：response.sendRedirect(“/“+request.getContextPath()+”/cart.jsp”)   <strong>“/“</strong>是多余的，request.getContextPath() 输出<strong>前面就包含了”/“</strong> </p></li><li><p>Tomcat的LifeCycleException   <br> 原因：web.xml出错，比如servlet配置时  \<servlet-mapping>和\<servlet> 中写的name不一致</servlet></servlet-mapping></p></li><li><p>问题：jsp报错-&gt;Property [oid] not found on type [java.lang.String]<br> 解决：这个问题肯定是遍历集合的时候没有写EL表达式，错写成了字符串 比如应该写\&lt;c:forEach items=”\${orders}” var=”order”&gt; <strong>错写成了\&lt;c:forEach items=”orders” var=”order”&gt; </strong> 这样EL表达式解析的时候<strong>就会去系统类找order</strong>，属性不存在-&gt;出错</p></li><li><p>中文乱码问题：发现在功能模块servlet中写了request.setCharacterEncoding(“UTF-8”)还是乱码<br> 解决：<strong>要在BaseServlet里写setCharacterEncoding</strong> 才行。也不知道是不是在父类反射调用函数时，request有了什么改变导致乱码</p></li><li><p>封装Hibernate工具类时报错，java.lang.ExceptionInInitializerError</p><p>Caused by: org.hibernate.service.spi.ServiceException: Unable to create requested service [org.hibernate.engine.jdbc.env.spi.JdbcEnvironment]</p><p>Caused by: org.hibernate.HibernateException: Access to DialectResolutionInfo <strong>cannot be null when ‘hibernate.dialect’ not set</strong> <br> 原因：new Configuration()后，<strong>没有调用configure()</strong>，导致Hibernate的配置文件没有读取</p></li><li><p>Spring整合Mybatis时，使用Mapper动态代理的方式开发DAO，数据库连接池异常。报错：</p><figure class="highlight plain"><figcaption><span>is abstract```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">调试方法：去掉与Mybatis相关的 代码。测试数据库连接池是否能够连接。</span><br></pre></td></tr></table></figure><p>/*//测试数据库连接池是没问题的</p><pre><code>DataSource ds = ac.getBean(&quot;dataSource&quot;,DataSource.class);java.sql.Connection conn = ds.getConnection();String sql = &quot;select * From user&quot;;PreparedStatement ps = conn.prepareStatement(sql);ResultSet rs = ps.executeQuery();while(rs.next()){    System.out.println(rs.getString(1));    System.out.println(rs.getString(2));    System.out.println(rs.getString(3));}if(ps != null){    ps.close();}if(conn != null){    conn.close();}*/</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">但是，下列代码就一直报错。不过控制台显示已经查询到了结果。</span><br></pre></td></tr></table></figure><p>QueryVo vo = new QueryVo();</p><pre><code>User u = new User();u.setUsername(&quot;王五&quot;);vo.setUser(u);List&lt;User&gt; list = userMapper.findUserByQueryVo(vo);for(User user:list) {    System.out.println(user);}</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    解决：**更换c3p0的版本** 。使用最新的0.9.5.2版本，抛弃Spring提供的0.9.1.2</span><br><span class="line"></span><br><span class="line">15. 在Eclipse进行Maven项目构建时出现问题</span><br><span class="line"></span><br><span class="line">    - maven build..  运行tomcat:run 后提示</span><br></pre></td></tr></table></figure><p>  No compiler is provided in this environment. Perhaps you are running on a JRE rather than a JDK?</p>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  原因：应该选择**jdk安装目录下的jre**目录，而不是jre1.8.144</span><br><span class="line"></span><br><span class="line">  解决：window-&gt;preference  ，搜索jre，选择**installed JRE** 选项卡，就可以更改路径</span><br><span class="line"></span><br><span class="line">- 解决了上述问题后再tomcat:run</span><br></pre></td></tr></table></figure><p>  org.apache.jasper.JasperException: Unable to compile class for JSP:<br>  <code>`</code></p><p>  原因：默认tomcat:run 默认使用的是tomcat6（看错误页面可找到版本），<strong>不支持jdk1.8的版本</strong>。</p><p>  解决：在maven工程<strong>添加高版本的tomcat插件</strong>，然后使用命令 tomcat版本号:run ，比如tomcat7:run </p></li><li><p>有个大坑！！导入了log4j.properties配置文件之后，启动tomcat服务总是会<strong>报错  \solr.log 无法访问！</strong> </p><p>原因：log4j.properties中有写${solr.log} 而这个变量依赖的<strong>solr.log.dir并没定义</strong><br> 解决：需要去catalina.bat里面<strong>添加一条语句setJAVA_OPTS=”-Dsolr.log.dir=C:\f\Solr\solr-7.3.0\server\logs”</strong>      一定要写在 set JPDA 后面 </p></li></ol>]]></content>
+      
+      <categories>
+          
+          <category> JavaWeb </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 报错 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>在centos6.5上安装jdk8_mysql_tomcat8</title>
+      <link href="/2018/03/19/%E5%9C%A8centos6-5%E4%B8%8A%E5%AE%89%E8%A3%85jdk8-mysql-tomcat8/"/>
+      <content type="html"><![CDATA[<h1 id="安装JDK1-8-0-u144"><a href="#安装JDK1-8-0-u144" class="headerlink" title="安装JDK1.8.0_u144"></a>安装JDK1.8.0_u144</h1><ol><li>官网下载jdk-8u144-linux-i586.tar.gz<br> </li><li>使用SSH将文件发送到 Linux的 /soft/文件夹</li><li>tar -xvf jdk-8u144-linux-i586.tar.gz -C /usr/local  解压</li><li>vim /etc/profile 配置JAVA_HOME等环境变量</li><li>source /etc/profile 生效</li></ol><h1 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h1><p>前面两相同，都是下载，并发送到Linux。从第三步开始，要先在/usr/local/下创建文件夹Mysql。</p><p>解压的时候，-C  /usr/local/mysql</p><p>后面的步骤：<strong>安装–启动–加入服务</strong> </p><ol><li><p>安装服务器端：rpm -ivh MySQL-server-5.6.22-1.el6.i686（换成你的版本号）.rpm</p><p>安装客户端：rpm -ivh MySQL-client-5.6.22-1.el6.i686（换成你的版本）.rpm   </p></li><li><p>启动mysql</p><p>service mysql start</p></li><li><p>将mysql加到系统服务中并设置开机启动</p><p>加入到系统服务：chkconfig –add mysql</p><p>自动启动：chkconfig mysql on</p><p>在后来就是改密码、开启远程登陆、开启3306端口</p></li></ol><h1 id="安装tomcat"><a href="#安装tomcat" class="headerlink" title="安装tomcat"></a>安装tomcat</h1><p>很简单，没有难度</p><p>*.tar.gz的文件包发送到Linux–解压–<strong>开启8080端口</strong> ，启动tomcat  ./startup.sh 后，就可以在物理机用虚拟机的ip:8080访问了</p>]]></content>
+      
+      <categories>
+          
+          <category> Linux服务器环境配置 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    <entry>
+      <title>Linux下Mysql常识汇总</title>
+      <link href="/2018/03/19/Linux%E4%B8%8BMysql%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4%E6%B1%87%E6%80%BB/"/>
+      <content type="html"><![CDATA[<ol><li><p>Mysql的默认密码在/root/.mysql_secret<br> </p></li><li><p>错误日志在 /var/lib/mysql/。文件名称为主机名.err。<strong>出问题多看看日志</strong> <br> </p></li><li><p>登陆命令： mysql -u root -p <br> -u [用户名]   -p  表示密码登录 <br> </p></li><li><p>chkconfig –add mysql增加系统服务<br>  <br> chkconfig mysql on 自动启动。</p></li><li><p>远程登录</p><p>grant all privileges on *.* to ‘root’ @’%’identified by ‘root’</p><p>flush privileges<br> linux默认只开放22端口，所以一般来说远程连接mysql或tomcat都不行，要先打开端口<br></p></li><li><p>远程访问mysql</p><p>开放Linux的对外访问的端口3306   </p><p>/sbin/iptables -I INPUT -p tcp –dport 3306 -j ACCEPT</p><p>/etc/rc.d/init.d/iptables save —将修改永久保存到防火墙中<br></p></li></ol>]]></content>
+      
+      <categories>
+          
+          <category> Mysql </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    <entry>
+      <title>更换设备如何维护Github主页博客</title>
+      <link href="/2018/03/18/%E6%9B%B4%E6%8D%A2%E8%AE%BE%E5%A4%87%E5%A6%82%E4%BD%95%E7%BB%B4%E6%8A%A4Github%E4%B8%BB%E9%A1%B5%E5%8D%9A%E5%AE%A2/"/>
+      <content type="html"><![CDATA[<p>最近新换了电脑，发现自己不知道如何在新电脑上继续写博客。搜索方法后总结如下</p><ol><li>在github的博客仓库里，新建分支SourceBackup。用来备份本地blog文件夹中的”scaffolds”、”source”、”themes”文件夹 以及_config.yml和package.json文件。这些都是自己在个性化定制博客，以及发表博文过程中，会修改到的。<br><br> 以后换机器前，把更新push到github上</li><li>重新下载node.js</li></ol><a id="more"></a><ol><li><p>在git bash中重新下载hexo。命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure></li><li><p>输入hexo init。默认会从hexo的仓库clone下一个最原始的hexo博客模板。</p></li><li><p><strong>使用自己SourceBackup分支中的文件/文件夹去替换</strong></p></li><li><p>安装必要插件：<br> npm install hexo-generator-search –save  文章搜索<br> npm install hexo-generator-sitemap –save  谷歌站点<br> npm install hexo-deployer-git –save  部署到github所需插件<br> 如果记不清  可以<strong>用hexo –debug查询已安装插件</strong> ，对比新老机子上的插件有什么差别</p></li></ol>]]></content>
+      
+      
+        <tags>
+            
+            <tag> 随笔 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>JDBC初次尝试</title>
+      <link href="/2017/11/26/JDBC%E5%88%9D%E6%AC%A1%E5%B0%9D%E8%AF%95/"/>
+      <content type="html"><![CDATA[<h3 id="如何使用JDBC连接数据库"><a href="#如何使用JDBC连接数据库" class="headerlink" title="如何使用JDBC连接数据库"></a>如何使用JDBC连接数据库</h3><ol><li>Class.forname() 构建数据库实例，自动想DriverManager注册</li><li>DriverManager.getConnection(str1,str2,str3)实现连接</li></ol><a id="more"></a><h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p>问题描述：cmd中可以sqlplus连接上数据库，但是JDBC一直连接不上。提示错误<strong>The Network Adapter could not establish the connection     at oracle.jdbc.driver.T4CConnection.logon(T4CConnection.java:412)</strong></p><p>分析与解决：</p><ol><li><p>先确认str1填写的IP地址是否正确。教程中写的是”jdbc:oracle:thin:@192.168.0.1:1521:SXT”。但是这个IP地址不是每个人都适用的。还有后面的数据库实例名称也不一定是SXT。<strong>正确姿势：</strong> 查看ip。cmd-&gt;<strong>ipconfig</strong>，找到以太网IPv4的地址。如果这个地址还是抛出异常（可能被网络运营商屏蔽了），使用<strong>localhost（127.0.0.1）</strong>。 查看数据库实例名：cmd-&gt;sqlplus-&gt; conn sys/密码 as sysdba-&gt;<strong>select instance_name from V$database</strong>。我的数据库实例名是orcl（安装的时候一路默认的话，很可能都是这个）</p></li><li><p>注意TNS监听服务是否开启。cmd-&gt; lsnrctl  输入<strong>status</strong>可以查看监听状态。如果看到以下信息，说明是监听没起来。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">正在连接到 (DESCRIPTION=(ADDRESS=(PROTOCOL=IPC)(KEY=EXTPROC1521)))</span><br><span class="line">TNS-12541: TNS: 无监听程序</span><br><span class="line"> TNS-12560: TNS: 协议适配器错误</span><br><span class="line">  TNS-00511: 无监听程序</span><br><span class="line">   32-bit Windows Error: 2: No such file or directory</span><br><span class="line">正在连接到 (DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))</span><br><span class="line">TNS-12541: TNS: 无监听程序</span><br><span class="line"> TNS-12560: TNS: 协议适配器错误</span><br><span class="line">  TNS-00511: 无监听程序</span><br><span class="line">   32-bit Windows Error: 61: Unknown error</span><br></pre></td></tr></table></figure><p>可以尝试输入<strong>start</strong>试试能否启动TNS监听。如果仍让失败，提示以下信息</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">启动tnslsnr: 请稍候...</span><br><span class="line"></span><br><span class="line">TNS-12560: TNS: 协议适配器错误</span><br><span class="line"> TNS-00530: 协议适配器错误</span><br></pre></td></tr></table></figure><p>只能从<strong>控制面板的管理工具-&gt;组件服务</strong>里启动TNS监听服务（按字母排序为O的倒数第二个）。然后再到lsnrctl里面输入start，这下应该可以成功了。再次输入status查看状态</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">TNS-01106: 使用名称LISTENER的监听程序已经启动</span><br><span class="line">LSNRCTL&gt; status</span><br><span class="line">正在连接到 (DESCRIPTION=(ADDRESS=(PROTOCOL=IPC)(KEY=EXTPROC1521)))</span><br><span class="line">LISTENER 的 STATUS</span><br><span class="line">------------------------</span><br><span class="line">别名                      LISTENER</span><br><span class="line">版本                      TNSLSNR for 32-bit Windows: Version 11.2.0.1.0 - Production</span><br><span class="line">启动日期                  26-11月-2017 12:59:15</span><br><span class="line">正常运行时间              0 天 0 小时 0 分 11 秒</span><br><span class="line">跟踪级别                  off</span><br><span class="line">安全性                    ON: Local OS Authentication</span><br><span class="line">SNMP                      OFF</span><br><span class="line">监听程序参数文件          （文件路径）</span><br><span class="line">监听程序日志文件          （文件路径）</span><br><span class="line">监听端点概要...</span><br><span class="line">  (DESCRIPTION=(ADDRESS=(PROTOCOL=ipc)(PIPENAME=\\.\pipe\EXTPROC1521ipc)))</span><br><span class="line">  (DESCRIPTION=(ADDRESS=(PROTOCOL=tcp)(HOST=127.0.0.1)(PORT=1521)))</span><br><span class="line">服务摘要..</span><br><span class="line">服务 &quot;CLRExtProc&quot; 包含 1 个实例。</span><br><span class="line">  实例 &quot;CLRExtProc&quot;, 状态 UNKNOWN, 包含此服务的 1 个处理程序...</span><br><span class="line">命令执行成功</span><br></pre></td></tr></table></figure><p>P.S:sqlplus能运行是因为<strong>只要启动了ORCL服务就可以运行</strong>，但是JDBC要TNS服务也启动。</p></li></ol><p><a href="https://www.cnblogs.com/zhaojiedi1992/archive/2013/06/01/oracle11g_sql_0064.html" target="_blank" rel="noopener">参考链接</a></p><p>JAR包选择：ojdbc6.jar支持jdk1.6 1.7 1.8 所以将他添加到EclipseEE项目的build path。不建议加到系统classpath</p>]]></content>
+      
+      <categories>
+          
+          <category> 数据库 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Oracle </tag>
+            
+            <tag> JDBC </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Linux驱动篇</title>
+      <link href="/2017/11/14/Linux%E9%A9%B1%E5%8A%A8%E7%AF%87/"/>
+      <content type="html"><![CDATA[<h2 id="设备分类"><a href="#设备分类" class="headerlink" title="设备分类"></a>设备分类</h2><ul><li><p>块设备</p><p>成块进行输入输出，例子：磁盘以记录块或扇区为单位进行数据读写。仅支持面向块的IO操作</p></li><li><p>字符设备</p><p>逐个字符输入输出。eg：键盘</p></li><li><p>网络设备</p></li></ul><h2 id="驱动程序"><a href="#驱动程序" class="headerlink" title="驱动程序"></a>驱动程序</h2><p>Linux将<strong>所有设备看成文件</strong></p><p>设备文件的属性有三部分：文件的类型、主设备号、次设备号（说明目标设备是同类中的第几个）</p>]]></content>
+      
+      <categories>
+          
+          <category> Linux知识 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    <entry>
+      <title>Lesson1</title>
+      <link href="/2017/11/12/Lesson1/"/>
+      <content type="html"><![CDATA[]]></content>
+      
+      
+    </entry>
+    
+    <entry>
+      <title>Python入门</title>
+      <link href="/2017/11/08/Python%E5%85%A5%E9%97%A8/"/>
+      <content type="html"><![CDATA[<h3 id="目标：完成语法基础"><a href="#目标：完成语法基础" class="headerlink" title="目标：完成语法基础"></a>目标：完成语法基础</h3><p>以下内容基于Python3.5.2文档</p><p>1.字符串：用’ ‘或者“ ”，但是<strong>输出一定是’ ‘</strong>显示的。p.s:如果字符串中有’ 或“ ，要用转义\</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &apos;&quot;Yes,&quot; he said.&apos;</span><br><span class="line">&apos;&quot;Yes,&quot; he said.&apos;</span><br><span class="line">&gt;&gt;&gt; &quot;\&quot;Yes,\&quot; he said.&quot; # 中间的&apos;与首尾相同，所以才需要\ </span><br><span class="line">&apos;&quot;Yes,&quot; he said.&apos;</span><br><span class="line">&gt;&gt;&gt; &apos;&quot;Isn\&apos;t,&quot; she said.&apos;    # 这里的\会原样输出是因为在子字符串内</span><br><span class="line">&apos;&quot;Isn\&apos;t,&quot; she said.&apos;</span><br></pre></td></tr></table></figure><p>注意，如果直接&gt;&gt;&gt;输入字符串，转义字符\n、\t等不能直接输出，用print就可以</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; s = &apos;First line.\nSecond line.&apos;  # \n means newline</span><br><span class="line">&gt;&gt;&gt; s  # without print(), \n is included in the output</span><br><span class="line">&apos;First line.\nSecond line.&apos;</span><br><span class="line">&gt;&gt;&gt; print(s)  # with print(), \n produces a new line</span><br><span class="line">First line.</span><br><span class="line">Second line.</span><br></pre></td></tr></table></figure><p>Python<strong>没有字符类型</strong>，字符就是长度为1的字符串</p><p>下标</p>]]></content>
+      
+      <categories>
+          
+          <category> 机器学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Python基础 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>DL开始前的准备</title>
+      <link href="/2017/11/07/DL%E5%BC%80%E5%A7%8B%E5%89%8D%E7%9A%84%E5%87%86%E5%A4%87/"/>
+      <content type="html"><![CDATA[<h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><ol><li><p>Anaconda下载和安装。</p><ul><li><a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/" target="_blank" rel="noopener">下载网址</a> ，选择最新版本。   安装一路默认。</li><li>安装完后，<strong>为了快速下载各种Python包</strong>，使用下列命令，添加Anaconda仓库镜像</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/</span><br><span class="line"></span><br><span class="line">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</span><br><span class="line"></span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure><a id="more"></a><p> 然后，比如你输入</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install numpy</span><br></pre></td></tr></table></figure><p>就可以安装 numpy包。</p><ul><li><p>添加第三方镜像/源</p><p><a href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/" target="_blank" rel="noopener">教程网站</a></p></li><li><p>更新 所有包</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda upgrade --all</span><br></pre></td></tr></table></figure></li></ul></li><li><p>Anaconda基础命令</p><ul><li><p>管理包</p><ul><li><p>conda install name——安装包</p><p>可以通过”=”来<strong>指定版本</strong>，</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eg：conda install numpy=1.0</span><br></pre></td></tr></table></figure><p>​ 可以同时安装多个包；安装某个包会自动安装它的依赖项</p></li><li><p>conda remove name——删除包</p></li><li><p>conda upgrade –all——更新所有包    conda uprade name——更新某个包</p></li><li><p>conda list——列出已安装的包</p></li><li><p>conda search name——不知道要安装的包的确切名字，可以搜索</p></li></ul></li><li><p>管理环境</p><ul><li><p>conda create -n env_name list_of_packages ——创建环境</p><p>​   -n env_name表示<strong>指定</strong>环境的<strong>名称</strong>     后面跟着的是<strong>要安装</strong>在环境<strong>的包列表（即一次安装多个包）名称</strong> </p><p><strong>创建环境</strong>对使用<strong>不同版本的Python</strong>很有利，可以在Python2.x和Python3.x中自由切换。例子如下</p><pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda create -n py2 python=2</span><br><span class="line">conda create -n py3 python=3</span><br></pre></td></tr></table></figure></code></pre><p>​ 上面的写法，安装的是Python2和Python3<strong>最新版</strong>，如果想安装具体的，要写=2.x</p></li><li><p>activate env_name——进入环境</p><p>在环境中，也可以用包管理的基础命令（conda install/list等）        </p></li><li><p>deactivate——离开环境</p></li><li><p>conda info -e/conda env list ——列出所有环境</p><p>当前正在使用的环境，会有一个*</p></li><li><p>conda env remove -n name/conda remove -n name –all ——删除环境。name是环境名称</p></li><li><p>conda env export &gt; environment.yaml——把<strong>环境</strong>以及已经安装的包<strong>导出</strong>到.yaml文件</p></li><li><p>conda env create -n name -f xxx.yaml——<strong>通过环境文件</strong>来创建环境</p><p>以上env均为必要，原样输入即可，不是指的环境名称</p></li></ul></li></ul></li><li><p>Jupyter Notebook操作</p><ul><li><p>在Anaconda Prompt中输入</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook</span><br></pre></td></tr></table></figure><p>​    就会在浏览器中打开</p></li><li><p>改变打开的路径</p><p>输入命令：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jupyter notebook --generate-config</span><br></pre></td></tr></table></figure><p>​    会 显示jupyter_notebook_config.py文件路径，打开并找到</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## The directory to use for notebooks and kernels. </span><br><span class="line">#c.NotebookApp.notebook_dir = &apos;&apos;</span><br></pre></td></tr></table></figure><p>​    改为</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">## The directory to use for notebooks and kernels. </span><br><span class="line">c.NotebookApp.notebook_dir = &apos;你要设置的Notebook路径&apos;</span><br></pre></td></tr></table></figure></li><li><p>关闭正在运行的notebook</p><p>在tab里的Running中 关闭</p></li><li><p>notebook的操作：</p><ul><li>shift + enter：一步一步执行</li><li>菜单的Cell-&gt;Run All：一次全部执行</li></ul></li><li><p>创建、使用Notebook</p><ul><li>界面右侧，New-&gt;Python3 创建自己的Notebook</li><li>主要工作区被称为单元格（cell），<strong>代码单元格(Code cell)，以[]开头</strong>，<strong>按下shift + enter运行</strong>，并且光标移动到新的单元格。</li><li>一个强大的特性：可以<strong>修改旧的</strong>单元格，再次shift + enter运行，会得出<strong>新的结果</strong>。</li><li>插入别的类型的单元格：insert插入单元格，<strong>选择类型Heading(标题)/Markdown</strong>，就可以使用markdown语法。</li><li>单元格高级操作：Edit菜单，单元格可以，删除、移动、剪贴、合并（把两段代码合并一起 ）</li><li>markdown单元格<strong>支持Latex</strong>语法。可以写些数学公式。</li><li>支持matplotlib。要先用<strong>%matplotlib inline</strong>告诉Jupyter Notebook我们要用这个库，后面该怎么画怎么画</li></ul></li></ul></li></ol><p>​          </p>]]></content>
+      
+      <categories>
+          
+          <category> 机器学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 环境配置 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Linux文件系统</title>
+      <link href="/2017/11/07/Linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/"/>
+      <content type="html"><![CDATA[<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><h3 id="1-分层"><a href="#1-分层" class="headerlink" title="1.分层"></a>1.分层</h3><p>第一层：虚拟文件系统(VFS)   第二层：具体文件系统（FATFS等）    </p><p>VFS封装底层，向C标准库提供系统调用接口</p><a id="more"></a><h2 id="I-O操作"><a href="#I-O操作" class="headerlink" title="I/O操作"></a>I/O操作</h2><p>Linux将设备当作文件来处理。</p><h3 id="1-分类"><a href="#1-分类" class="headerlink" title="1.分类"></a>1.分类</h3><p>非缓冲式I/O操作：系统调用提供           缓冲式：C标准输入输出库函数提供</p><p>非缓冲式用“文件描述符”来表示文件</p><h3 id="2-文件标识符"><a href="#2-文件标识符" class="headerlink" title="2.文件标识符"></a>2.文件标识符</h3><p>0——标准输入，从键盘输入     1——标准输出，输出到终端    2——标准错误，存放错误信息的堆栈</p><h3 id="3-标准I-O"><a href="#3-标准I-O" class="headerlink" title="3.标准I/O"></a>3.标准I/O</h3><p>三种缓冲类型：全缓冲、行缓冲、不带缓冲</p><p>文件指针：文件的各种<strong>信息存在结构体FILE</strong>中，流（stream）用指针FILE *来描述</p><h3 id="4-文件和目录操作"><a href="#4-文件和目录操作" class="headerlink" title="4.文件和目录操作"></a>4.文件和目录操作</h3><p>文件类型：</p><ul><li>目录文件（directory file）        <ul><li>普通文件（regular file）    </li></ul></li><li>字符设备文件（char device file）</li><li>块设备文件（block device file）</li><li>FIFO</li><li>套接字（Socket）</li><li>符号链接（symbolic link）</li></ul><p>文件访问权限：用ls -l会看到文件具体信息，最前方的是<strong>10个字符的字符串</strong>表示文件类型和访问权限</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-rwxr-xr-x 1 root root 6444 09-22 15:33 shmwrite</span><br><span class="line">-rw-r--r-- 1 root root 1443 09-22 15:33 shmwrite.c</span><br><span class="line">drwxr-xr-x 2 root root 4096 09-22 17:19 test</span><br></pre></td></tr></table></figure><p>​    第一个字符表示文件类型。<strong>d代表目录，-代表非目录</strong> 。 后边的都是<strong>三个字符为一组权限</strong>，          </p><p>​    分三组。依次表示，<strong>所有者权限（当前用户），同组用户权限，其它用户权限</strong>。</p><p>​    r,读权限；w，写权限；x，可执行权限；-没权限。**</p><p>文件属性：判断文件存不存在可以用stat/open。</p><p>​    stat结构体：st_mode——判断文件类型，比如是不是可执行文件</p><p>常用函数：</p><p>stat：可以获取文件的一些状态：大小、修改时间等。结果保存在stat结构体变量里。</p><p>DIR <em> opendir(const char </em> name)：打开文件夹，返回值是DIR *类型</p><p>struct dirent <em> readdir(DIR </em> dir)：<strong>联合while，可遍历</strong>文件夹内所有文件。</p>]]></content>
+      
+      <categories>
+          
+          <category> Linux知识 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    <entry>
+      <title>LearingGroupup_Introduction</title>
+      <link href="/2017/11/06/LearingGroupup-Introduction/"/>
+      <content type="html"><![CDATA[<h2 id="常见概念的关系"><a href="#常见概念的关系" class="headerlink" title="常见概念的关系"></a>常见概念的关系</h2><p>范围：人工智能&gt;机器学习&gt;深度学习。</p><p>机器学习是实现人工智能的<strong>方法</strong>，深度学习是实现机器学习的<strong>技术</strong></p><h2 id="提问的智慧"><a href="#提问的智慧" class="headerlink" title="提问的智慧"></a>提问的智慧</h2><p><a href="https://millearninggroup.github.io/docs/how-to-ask/" target="_blank" rel="noopener">网址</a></p><ol><li><p>不要因为第一次搜索没找到答案/找到太多答案，就将<strong>所有问题一股脑抛出</strong></p><p>​</p></li></ol><h2 id="参考资源"><a href="#参考资源" class="headerlink" title="参考资源"></a>参考资源</h2><p>书籍：周志华《机器学习》、李航《统计学习方法》</p><p>视频：台湾大学. 林轩田， Machine Learning Foundations 和 Machine Learning Techniques<br>​    台湾大学. 李宏毅， Machine Learning 和 having it deep and structured<br>​    Stanford. CS231n: Convolutional Neural Networks for Visual Recognition </p>]]></content>
+      
+      <categories>
+          
+          <category> 机器学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 基础介绍、学习资源、 提问的智慧 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Linux下GCC编译</title>
+      <link href="/2017/10/30/Linux%E4%B8%8BGCC%E7%BC%96%E8%AF%91/"/>
+      <content type="html"><![CDATA[<h2 id="gcc-文件名-c"><a href="#gcc-文件名-c" class="headerlink" title="gcc + 文件名.c"></a>gcc + 文件名.c</h2><p>   将.c文件预处理、汇编、编译、链接生成可执行程序<br>   默认生成a.out可执行程序</p><h2 id="gcc-xx-c-o-xx"><a href="#gcc-xx-c-o-xx" class="headerlink" title="gcc xx.c -o xx"></a>gcc xx.c -o xx</h2><p>   同样也是预处理、汇编、编译链接<br>   <strong>-o 指定输出文件的文件名</strong>。</p><h2 id="gcc-O2-xx-c-o-xx"><a href="#gcc-O2-xx-c-o-xx" class="headerlink" title="gcc -O2 xx.c -o xx"></a>gcc -O2 xx.c -o xx</h2><p>   -O[1-3] 使用编译优化来编译程序，优化等级1-3，级别越大优化效果越好</p><h2 id="gcc-c-xx-c"><a href="#gcc-c-xx-c" class="headerlink" title="gcc -c xx.c"></a>gcc -c xx.c</h2><p>   生成.o文件，然后可以用gcc xx.o -o xx生成可执行文件</p><p>使用的时候，直接用2或3种方法就好了。写一句话，就完成，不用像老师写这么多句的。</p>]]></content>
+      
+      <categories>
+          
+          <category> Linux知识 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    <entry>
+      <title>Linux命令</title>
+      <link href="/2017/10/30/Linux%E5%91%BD%E4%BB%A4/"/>
+      <content type="html"><![CDATA[<ol><li><p>ls   显示当前目录下的文件和目录<br> -l  详细信息<br> -a  输出包括隐藏文件</p></li><li><p>mkdir 创建目录<br> -p   无父目录，一起创建。 mkdir test/tmp -p</p></li><li><p>cp 拷贝<br>  例子：cp 文件1 文件2  复制文件1内容到文件2</p>  <a id="more"></a></li><li><p>mv 移动或重命名<br>  例子：mv 文件名1 文件名2  把名字改成文件名2</p></li><li><p>rm 删除文件<br> -r 删除子目录以及文件。 没有该参数的话 无法删除目录<br> -f 强制删除 </p></li><li><p>echo 内容 &gt;文件名</p></li><li><p>cat 文件名  查看文件内容</p></li><li><p>~ 表示主目录</p></li><li><p>clear 清屏</p></li><li><p>pwd 显示当前目录  输出格式是”/xx/xx”</p></li><li><p>kill 关闭进程</p></li><li><p>top 动态进程列表 按q退出 </p></li><li><p>man + 命令名称  显示命令帮助  （命令不会，找男人）</p></li><li><p>tar<br>  -c 打包<br>  -x 解压缩</p><pre><code>-z gzip压缩格式-j bzip2格式-v 显示压缩/解压缩过程</code></pre><p>  -f 指定输出文件名<br>  ​<br>  注意：打包后，后缀是.tar 打包并压缩后缀才是.tar.gz或.tar.bz2   </p><p>  例子：<br>  打包并压缩 tar -czvf 指定生成的名字&lt;.tar.gz&gt; 要压缩的文件(夹)</p></li></ol><p>解压缩：tar -xzvf 压缩文件名&lt;.tar.gz&gt;</p>]]></content>
+      
+      <categories>
+          
+          <category> Linux知识 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    <entry>
+      <title>命令格式</title>
+      <link href="/2017/10/29/%E5%91%BD%E4%BB%A4%E6%A0%BC%E5%BC%8F/"/>
+      <content type="html"><![CDATA[<p>[]——表示可选参数<br>&lt;&gt;——表示必须</p><p>参数的格式：<br>第一种：参数用-的说明后面的参数是<strong>字符</strong>形式（Unix 风格）。<br>第二种：参数用–的说明后面的参数是<strong>单词</strong>形式（GNU 风格）。<br>第三种：参数前有横的是 System V风格。<br>第四种：参数前没有横的是 BSD风格。</p>]]></content>
+      
+      
+        <tags>
+            
+            <tag> Linux、git、命令提示格式 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Github和git命令总结</title>
+      <link href="/2017/10/29/Github%E5%92%8Cgit%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/"/>
+      <content type="html"><![CDATA[<h1 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h1><h2 id="1-仓库"><a href="#1-仓库" class="headerlink" title="1.仓库"></a>1.仓库</h2><p>用于存放项目</p><a id="more"></a><h2 id="2-分支"><a href="#2-分支" class="headerlink" title="2.分支"></a>2.分支</h2><p>master：主分支，存放<strong>最终版本代码</strong></p><p>其他分支：对主分支的拷贝，我们<strong>在其他分支修改再合并</strong>到master。</p><p>在分支中对某个文件修改，然后Cmommit Changes就可以修改。</p><h2 id="3-请求代码合并"><a href="#3-请求代码合并" class="headerlink" title="3.请求代码合并"></a>3.请求代码合并</h2><p>pull request：子分支请求和master分支进行合并，确认之后可以提交</p><p>merge pull request：确认合并到master。 </p><p>如果想要删掉已经合并的分支，Delete branch</p><h2 id="4-fork"><a href="#4-fork" class="headerlink" title="4.fork"></a>4.fork</h2><p>把一个repo拷贝到你的页面，你也持有该仓库的一个副本</p><h2 id="5-watch"><a href="#5-watch" class="headerlink" title="5.watch"></a>5.watch</h2><p>该仓库有变更时，可以收到邮件提醒。</p><h2 id="6-star"><a href="#6-star" class="headerlink" title="6.star"></a>6.star</h2><p>收藏</p><h4 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h4><p><strong>fork</strong>一个repo作为自己的副本-&gt;用<strong>git</strong>命令修改、管理该仓库（git add 、git commit 、git push）</p><p>-&gt;发起pull request，就可以<strong>把自己的修改提交给原始仓库管理者</strong></p><h1 id="git命令"><a href="#git命令" class="headerlink" title="git命令"></a>git命令</h1><h2 id="1-git-clone-https："><a href="#1-git-clone-https：" class="headerlink" title="1.git clone https：//"></a>1.git clone https：//</h2><p>先去repo页面点绿色的<strong>Clone or download</strong> ，复制地址</p><p>然后就可以在某个文件夹，右键-&gt;git bash使用命令 git clone + 已复制的https地址</p><p>上面的只能创建master分支。如何指定特定分支？</p><p>eg：git clone -b feature-edits <a href="https://github.com/Faith-Uchiha/hello-world.git" target="_blank" rel="noopener">https://github.com/Faith-Uchiha/hello-world.git</a></p><p><strong>git clone 分支名 repo https地址</strong></p><h2 id="2-git-pull"><a href="#2-git-pull" class="headerlink" title="2.git pull"></a>2.git pull</h2><p>拉取该分支<strong>最新</strong>内容，与本地（当前电脑、文件夹）对比。<br>就是更新该分支的。</p><h2 id="3-git-add"><a href="#3-git-add" class="headerlink" title="3.git add"></a>3.git add</h2><p>git add .——添加所有目录  git add 文件名——添加文件</p><p>注意此命令只是<strong>添加到了git队列，并没有真正上传到仓库分支</strong></p><p>即使不是添加新文件，而是<strong>在旧文件上修改</strong>，想要更新到分支上，也要git add git commit git push</p><h2 id="4-git-commit-am"><a href="#4-git-commit-am" class="headerlink" title="4.git commit -am"></a>4.git commit -am</h2><p>-am 后面跟上注释，双引号</p><h2 id="5-git-push"><a href="#5-git-push" class="headerlink" title="5.git push"></a>5.git push</h2><p>真正添加到分支。</p>]]></content>
+      
+      <categories>
+          
+          <category> Github和git </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    <entry>
+      <title>类加载和初始化顺序的问题</title>
+      <link href="/2017/09/30/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%BA%E5%BA%8F%E7%9A%84%E9%97%AE%E9%A2%98/"/>
+      <content type="html"><![CDATA[<h2 id="问题再现"><a href="#问题再现" class="headerlink" title="问题再现"></a>问题再现</h2><p>在为坦克大战的坦克增加血条显示时，采用内部类BloodBlock + 构造方法的写法，这时问题来了，发现血条怎么都画不出来。 下面是问题代码。</p><a id="more"></a><p>TankWar.java中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Tank myTank = new Tank(400,300,true,this);</span><br></pre></td></tr></table></figure></p><p>Tank.java中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">private int x,y;</span><br><span class="line">BloodBlock bb = new BloodBlock(x,y);//感觉参数没传递进去？</span><br><span class="line">  public Tank(int x, int y, boolean good) &#123;</span><br><span class="line">      this.x = x;</span><br><span class="line">      this.y = y;</span><br><span class="line">      this.good = good;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  public Tank(int x, int y,boolean good,TankFrame tc)</span><br><span class="line">  &#123;</span><br><span class="line">      this(x,y,good);</span><br><span class="line">      this.tc = tc;</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  public Tank(int x, int y,boolean good,Tank.Direction dir,TankFrame tc)</span><br><span class="line">  &#123;</span><br><span class="line">      this(x,y,good,tc);</span><br><span class="line">      this.dir = dir;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  private class BloodBlock</span><br><span class="line">  &#123;</span><br><span class="line">      int x ,y;</span><br><span class="line">      public BloodBlock(int x,int y)</span><br><span class="line">      &#123;</span><br><span class="line">          this.x = x;</span><br><span class="line">          this.y = y;</span><br><span class="line">      &#125;</span><br><span class="line">      public void draw(Graphics g)</span><br><span class="line">      &#123;</span><br><span class="line">          Color c = g.getColor();</span><br><span class="line">          g.setColor(Color.RED);</span><br><span class="line">          g.drawRect(this.x, this.y-20, WIDTH, 20);</span><br><span class="line">          g.fillRect(this.x, this.y-20, getLife()*WIDTH/100, 20);</span><br><span class="line">          g.setColor(c);</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p><p>很自然的将调用过程理解为，调用Tank()构造方法，将400,300传递给内部成员变量x,y； 然后再调用BloodBlock的构造方法，将Tank的x,y赋值给BloodBlock的x,y；画出血条。</p><p>实际上，执行过程并不是如此</p><h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>这里就涉及到类加载和初始化的顺序问题。 </p><p><strong>初始化顺序为</strong>：静态域（静态变量，静态代码块）-&gt;动态域（成员变量，普通代码块）-&gt;构造器。</p><p>1.<strong>初次主动使用</strong>某各类时，会加载类，此时为static变量<strong>分配内存</strong>，并设置默认值（0，null，false）。然后开始<strong>初始化static域</strong>：静态域中各部分执行的先后顺序与代码先后顺序有关（也就是说，静态代码块和静态变量，谁先执行，要看谁写在前面）</p><p>2.然后是执行成员变量的初始化和代码块：执行先后顺序也是与代码位置有关</p><p>3.最后构造器。</p><p>所以，上面的错误原因就是，在成员变量<strong>bb初始化的时候</strong>： BloodBlock bb = new BloodBlock(x,y);  这里还<strong>未执行Tank的构造方法</strong>，所以这个时候Tank的<strong>x,y并未赋值</strong>，为默认值0。</p><p>改正：可以把new BloodBlock(x,y);这句话放入Tank()的构造方法里。</p><p>实际上后面测试发现：如果用构造方法的话，血块就会固定在初始位置，然而血块应该是<strong>跟随Tank移动的，所以直接用Tank的x,y就好了</strong> 不用自己写构造方法。</p><p>例子可参考:<a href="http://www.cnblogs.com/echo1937/p/6242578.html" target="_blank" rel="noopener">阿里巴巴14年校招附加题的解析</a><br>看了这个例子会对初始化过程有更深入的了解。</p>]]></content>
+      
+      <categories>
+          
+          <category> Java问题汇总 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    <entry>
+      <title>JavaSE练手项目之问题</title>
+      <link href="/2017/09/28/JavaSE%E7%BB%83%E6%89%8B%E9%A1%B9%E7%9B%AE%E4%B9%8B%E9%97%AE%E9%A2%98/"/>
+      <content type="html"><![CDATA[<p>今天在使用 java.util.Random类产生随机数的时候，遇到一个问题。</p><p>以下是出问题的代码</p><a id="more"></a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if(mis_step==0)</span><br><span class="line">&#123;</span><br><span class="line">mis_step = r.nextInt(5);</span><br><span class="line">this.fire();</span><br><span class="line">&#125;</span><br><span class="line">mis_step --;</span><br></pre></td></tr></table></figure><p>mis_step在对象new出来之后，成员变量已经用r.next(5)初始化。</p><p>在Debug中运行发现：Wacth窗中观察，mis_step会在<strong>运行一段时间之后变为负数，过了一会儿又变回了正数</strong>。</p><p>解决：变为负数的原因是，<strong>nextInt(Bound) 返回的值是0~Bound-1的Int类型数</strong></p><p>很有可能在if的 <strong>mis_step = r.nextInt(5)</strong>这个赋值语句中得到0值，随后mis_step –就会变为负数，然后就死掉，不会再有重新复制的机会，<strong>炮弹再也不会发出</strong>。</p><p>看到变回正数的原因是：其实看到的是下一个Tank的mis_step了，而不是自身自动回复。</p><p>所以,为了避免出现负数，一般的<strong>用法都是 r.nextInt(Bound)+XX</strong></p>]]></content>
+      
+      <categories>
+          
+          <category> Java问题汇总 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    <entry>
+      <title>JavaSESocket编程之问题</title>
+      <link href="/2017/09/16/JavaSESocket%E7%BC%96%E7%A8%8B%E4%B9%8B%E9%97%AE%E9%A2%98/"/>
+      <content type="html"><![CDATA[<h1 id="问题1"><a href="#问题1" class="headerlink" title="问题1"></a>问题1</h1><p>从标准输入流（即控制台输入）读取字符，<strong>不能使用ReadUTF()方法</strong>，否则会读取不进来。</p><a id="more"></a><h1 id="问题2"><a href="#问题2" class="headerlink" title="问题2"></a>问题2</h1><p>使用BufferedReader类的readLine()方法读取System.in的输入之后，</p><p>再用WriteUTF()发送给Server，<strong>server用ReadUTF()读的话，会抛异常</strong>。</p><h1 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h1><h3 id="对于问题1"><a href="#对于问题1" class="headerlink" title="对于问题1"></a>对于问题1</h3><p>改用BufferedReader的ReadLine()</p><h3 id="对于问题2"><a href="#对于问题2" class="headerlink" title="对于问题2"></a>对于问题2</h3><p>尚未解决。<strong>个人猜测：</strong>因为<strong>编码</strong>不一样，WriteUTF/ReadUTF是要求Unicode编码，而<strong>中文操作系统</strong>，从标准输入流输入的应该是<strong>GBK编码</strong></p><p>待以后深入学习Java能够看Java源码的时候再来解决。</p><hr><p>问题2解决：真正的原因并不是编码的问题，即使client端改为PrintWriter类的println方法，server端改为BufferedReader类的readLine()方法，还是会有异常！</p><p>而是<strong>没有调用flush()方法！！！</strong>。缓冲区没满，不调用flush()，输出流是不会输出的。所以才会抛出异常。</p><p><strong>重要：</strong> flush()方法何时使用：涉及到<strong>缓冲区</strong>的类，都应该使用。</p><p>建议除了FileOutputStream和FileWriter类，<strong>BufferedWriter</strong>、DataOutputStream、PrintWriter、ObjectOutputstream等输出流<strong>都应该写flush()</strong>。</p><p>File***输出流是以二进制的形式写入的，所以flush()调用也无效果，可用可不用。  <strong>FileOutputStream()没有重写flush()，所以没效果</strong></p>]]></content>
+      
+      <categories>
+          
+          <category> Java问题汇总 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    <entry>
+      <title>指针1</title>
+      <link href="/2017/08/22/%E6%8C%87%E9%92%881/"/>
+      <content type="html"><![CDATA[<p>之前学C语言的时候，指针这一块总觉得很难，一直没有信心完全弄明白。</p><p>看过一遍书之后，知识点记得几天然后马上就忘记了。</p><p>这次争取完全理解，并且能够熟练应用！</p><a id="more"></a>]]></content>
+      
+      <categories>
+          
+          <category> C语言巩固——《C和指针》读书笔记 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    <entry>
+      <title>First</title>
+      <link href="/2017/08/16/First/"/>
+      <content type="html"><![CDATA[<p>这是我建博客后尝试写的一个.md测试</p><h1 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a>遇到的坑</h1><h2 id="1-yilia主题的所有文章按钮"><a href="#1-yilia主题的所有文章按钮" class="headerlink" title="1.yilia主题的所有文章按钮"></a>1.yilia主题的所有文章按钮</h2><p>总算是所有东西都弄好了，弄“所有文章”的显示的时候，竟然报错</p><p><strong>ERROR plugin load failed hexo-generator-json-content</strong></p><a id="more"></a><p>后来才发现，原来是因为我的node.js的版本太低了</p><p>原来我用的是yilia主题，后来发现categories和tags怎么都搞不好。</p><p>最后就换了next主题</p><h2 id="2-next主题添加站内搜索"><a href="#2-next主题添加站内搜索" class="headerlink" title="2.next主题添加站内搜索"></a>2.next主题添加站内搜索</h2><p>hexo-generator-searchdb这个也安装了：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure><p>站点配置文件也改了：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  limit: 10000</span><br></pre></td></tr></table></figure><p>一直无法搜索，原来还少了最后一步：主题配置文件</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">local_search:</span><br><span class="line">  enable: true</span><br></pre></td></tr></table></figure><h2 id="3-Markdown语法问题"><a href="#3-Markdown语法问题" class="headerlink" title="3.Markdown语法问题"></a>3.Markdown语法问题</h2><p>使用“```” 这个字符的时候，<br>最好第一个“```”之后，（这里的`是用转义字符“\”打的）回车再写文本</p><p>不然很容易和下一个要引用的段穿在一起</p><p>还有#后面要空格才能接文本</p>]]></content>
+      
+      <categories>
+          
+          <category> 初入博客 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 随笔 </tag>
+            
+            <tag> 初次尝试 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+  
+  
+    
+    <entry>
+      <title>标签</title>
+      <link href="/tags/index.html"/>
+      <content type="html"><![CDATA[]]></content>
+    </entry>
+    
+    <entry>
+      <title>分类</title>
+      <link href="/categories/index.html"/>
+      <content type="html"><![CDATA[]]></content>
+    </entry>
+    
+  
+</search>
